@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Browse from "./components/Browse";
+import UserAuth from "./components/UserAuth";
+import ManageUser from "./components/ManageUser";
+import UpdateUser from "./components/UpdateUser";
+import NotFound from "./components/NotFound";
+import Navbar from "./components/Navbar";
+import { AppProvider } from './AppContext';
+import AddProduct from './components/AddProduct';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <AppProvider>
+          <Navbar />
+
+          <Routes>
+            <Route element={<Home />} path="/" />
+            <Route element={<Login />} path="/login" />
+            <Route element={<Signup />} path="/signup" />
+            <Route element={<Browse />} path="/browse" />
+            <Route element={<AddProduct />} path="/add" />
+            <Route
+              element={
+                <UserAuth>
+                  <ManageUser />
+                </UserAuth>
+              }
+              path="/manageuser"
+            />
+            <Route element={<UpdateUser />} path="/updateuser/:id" />
+            <Route element={<NotFound />} path="*" />
+          </Routes>
+
+        </AppProvider>
+      </BrowserRouter>
     </div>
   );
 }
