@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import UseAppContext from "../AppContext";
+import "../App.css";
 
 const Navbar = () => {
   const { loggedin, logout } = UseAppContext();
@@ -8,7 +9,7 @@ const Navbar = () => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
-
+    
   const displayUserOption = () => {
     if (loggedin) {
       return (
@@ -43,7 +44,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary nav-height">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           ReFurnished

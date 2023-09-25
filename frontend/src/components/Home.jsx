@@ -20,7 +20,7 @@ const Home = () => {
   };
   return (
     <div className="container">
-      <div className="header text-center vh-100">
+      <div className="header text-center head-height">
         <div className="py-5">
             <h1 className="brand">ReFurnished</h1>
             <h6 className="tagline">Buy and Sell Old Furnitures</h6>
@@ -28,21 +28,21 @@ const Home = () => {
 
         <div className="row gx-5">
             <div className="col">
-                <div className="card p-3">
-                    <img className="img-fluid rounded mx-auto d-block" src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" width={50} alt="" />
-                    <h4 className="">Get Best Prices.</h4>
+                <div className="card p-3 tagline">
+                    <img className="img-fluid rounded m-auto d-block" src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" width={50} alt="" />
+                    <h4 className="pb-2">Get Best Prices.</h4>
                 </div>
             </div>
             <div className="col">
-                <div className="card p-3">
-                    <img className="img-fluid rounded mx-auto d-block" src="https://cdn-icons-png.flaticon.com/512/1198/1198368.png" width={50} alt="" />
-                    <h4 className="">Get Quality Furnitures.</h4>
+                <div className="card p-3 tagline">
+                    <img className="img-fluid rounded m-auto d-block" src="https://cdn-icons-png.flaticon.com/512/1198/1198368.png" width={50} alt="" />
+                    <h4 className="pb-2">Get Quality Furnitures.</h4>
                 </div>
             </div>
             <div className="col">
-                <div className="card p-3">
-                    <img className="img-fluid rounded mx-auto d-block" src="https://cdn-icons-png.flaticon.com/512/5530/5530525.png" width={50} alt="" />
-                    <h4 className="">Inspected before listing.</h4>
+                <div className="card p-3 tagline">
+                    <img className="img-fluid rounded m-auto d-block" src="https://cdn-icons-png.flaticon.com/512/5530/5530525.png" width={50} alt="" />
+                    <h4 className="pb-2">Inspected before listing.</h4>
                 </div>
             </div>
         </div>
