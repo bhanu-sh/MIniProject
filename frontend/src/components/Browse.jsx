@@ -1,59 +1,65 @@
 import React, { useEffect, useState } from "react";
-import laptopList from "./dummydata";
+import furnitureList from "./dummydata";
 
 const Browse = () => {
-  const [laptopData, setLaptopData] = useState(laptopList);
-
-  const brands = ["Sofa", "Bed", "Table", "Chair"];
-
-  const [selOptions, setSelOptions] = useState([]);
+  const [furnitureData, setFurnitureData] = useState(furnitureList);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTypes, setSelectedTypes] = useState([]);
 
   const displayData = () => {
-    return laptopData.map((laptop) => (
-      <div className="col-md-3 py-2">
+    return furnitureData.map((furniture) => (
+      <div className="col-md-3 py-2 furniture-card " key={furniture.id}>
         <div className="card">
-          <img className="card-img-top" src={laptop.image} alt="" />
+          <img
+            className="card img-resize img-fluid"
+            src={furniture.image}
+            alt=""
+          />
           <div className="card-body">
-            <h4>{laptop.brand}</h4>
-            <h3>{laptop.model}</h3>
-            <h2>&#8377; {laptop.price}</h2>
+            <h4>{furniture.name}</h4>
+            <h3>{furniture.year}</h3>
+            <h2>&#8377; {furniture.price}</h2>
+            <div className="">
+              <a href="/product">
+                <button className="btn btn-success text-center">Buy Now</button>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     ));
   };
 
-  const searchLaptop = (e) => {
-    const search = e.target.value;
-    const result = laptopList.filter((laptop) => {
-      return laptop.model.toLowerCase().includes(search.toLowerCase());
-    });
-    setLaptopData(result);
+  const searchFurniture = (e) => {
+    const search = e.target.value.toLowerCase();
+    setSearchQuery(search);
   };
-
-  const filterBrand = (e) => {
-    if (e.target.value === "") return setLaptopData(laptopList);
-    const selBrand = e.target.value;
-    const result = laptopList.filter((laptop) => {
-      return laptop.brand === selBrand;
-    });
-    setLaptopData(result);
-  };
-
-  const selectOption = (brand) => {
-    if(selOptions.includes(brand)) {
-        setSelOptions(selOptions.filter((b) => b !== brand));
-    }else{
-        setSelOptions([...selOptions, brand]);
-    }
-  }
 
   useEffect(() => {
-    if(selOptions.length === 0) return setLaptopData(laptopList);
-    setLaptopData(laptopList.filter((laptop) => {
-        return selOptions.includes(laptop.brand);
-    }))
-  }, [ selOptions ])
+    let filteredData = furnitureList;
+
+    if (searchQuery) {
+      filteredData = filteredData.filter((furniture) =>
+        furniture.name.toLowerCase().includes(searchQuery)
+      );
+    }
+
+    if (selectedTypes.length > 0) {
+      filteredData = filteredData.filter((furniture) =>
+        selectedTypes.includes(furniture.type)
+      );
+    }
+
+    setFurnitureData(filteredData);
+  }, [searchQuery, selectedTypes]);
+
+  const handleTypeCheckboxChange = (type) => {
+    if (selectedTypes.includes(type)) {
+      setSelectedTypes(selectedTypes.filter((t) => t !== type));
+    } else {
+      setSelectedTypes([...selectedTypes, type]);
+    }
+  };
 
   return (
     <div>
@@ -61,30 +67,46 @@ const Browse = () => {
         <div className="container py-5">
           <h1 className="text-center">Browse Furnitures</h1>
           <hr />
-          <input type="text" className="form-control" onChange={searchLaptop} />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search Furniture"
+            onChange={searchFurniture}
+          />
 
           <div className="row mt-4">
             <div className="col-md-5">
-              <select className="form-control w-25 mt-4" onChange={filterBrand}>
+              <select
+                className="form-control w-25 mt-4"
+                onChange={(e) => handleTypeCheckboxChange(e.target.value)}
+              >
                 <option value="">Furniture Type</option>
-                {brands.map((b) => (
-                  <option value={b}>{b}</option>
+                {["Sofa", "Bed", "Table", "Chair"].map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
                 ))}
               </select>
             </div>
-            
+
             <div className="col-md-4 my-auto">
-                <input checked={(selOptions.includes('Sofa'))} onClick={() => {selectOption('Sofa')}} className="form-check-input" type="checkbox" /> Sofa&nbsp;&nbsp;&nbsp;
-                <input checked={(selOptions.includes('Bed'))} onClick={() => {selectOption('Bed')}} className="form-check-input" type="checkbox" /> Bed&nbsp;&nbsp;&nbsp;
-                <input checked={(selOptions.includes('Table'))} onClick={() => {selectOption('Table')}} className="form-check-input" type="checkbox" /> Table&nbsp;&nbsp;&nbsp;
-                <input checked={(selOptions.includes('Chair'))} onClick={() => {selectOption('Chair')}} className="form-check-input" type="checkbox" /> Chair&nbsp;&nbsp;&nbsp;
+              {["Sofa", "Bed", "Table", "Chair"].map((type) => (
+                <label key={type} className="form-check-label">
+                  <input
+                    type="checkbox"
+                    checked={selectedTypes.includes(type)}
+                    onChange={() => handleTypeCheckboxChange(type)}
+                  />
+                  {type}&nbsp;&nbsp;&nbsp;
+                </label>
+              ))}
             </div>
           </div>
         </div>
       </header>
 
       <div className="container">
-        <div className="row">{displayData()}</div>
+        <div className="row" >{displayData()}</div>
       </div>
     </div>
   );

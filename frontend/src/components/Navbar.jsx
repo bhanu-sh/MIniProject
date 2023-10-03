@@ -9,19 +9,25 @@ const Navbar = () => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
-    
+
   const displayUserOption = () => {
     if (loggedin) {
       return (
         <>
-        <li className="nav-item">
-          <button className="btn btn-danger" onClick={logout}>
-            Logout
-          </button>
-        </li>
-        <li>
-          <img height={50} width={50} className="rounded-circle" src={'http://localhost:5000/'+currentUser.avatar} alt="avatar" />
-        </li>
+          <li className="nav-item">
+            <button className="btn btn-danger" onClick={logout}>
+              Logout
+            </button>
+          </li>
+          <li>
+            <img
+              height={50}
+              width={50}
+              className="rounded-circle"
+              src={"http://localhost:5000/" + currentUser.avatar}
+              alt="avatar"
+            />
+          </li>
         </>
       );
     } else {
@@ -77,6 +83,15 @@ const Navbar = () => {
                 Manage User
               </NavLink>
             </li>
+            {loggedin ? (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/add">
+                    Add Furniture
+                  </NavLink>
+                </li>
+              </>
+            ) : null}
           </ul>
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
