@@ -20,7 +20,7 @@ const Browse = () => {
             <h3>{furniture.year}</h3>
             <h2>&#8377; {furniture.price}</h2>
             <div className="">
-              <a href="/product">
+              <a href={"/product/"+furniture._id}>
                 <button className="btn btn-success text-center">Buy Now</button>
               </a>
             </div>

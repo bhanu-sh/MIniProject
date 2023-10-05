@@ -42,7 +42,7 @@ function App() {
               path="/manageuser"
             />
             <Route element={<UpdateUser />} path="/updateuser/:id" />
-            <Route element={<Product />} path="/product" />
+            <Route element={<Product />} path="/product/:id" />
             <Route element={<NotFound />} path="*" />
           </Routes>
         </AppProvider>
