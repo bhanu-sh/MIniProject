@@ -133,7 +133,8 @@ const Signup = () => {
                 value={signupForm.values.password}
               />
 
-              <input type="file" onChange={uploadFile} />
+              <label>Upload Profile Picture</label>
+              <input className="form-control mb-4" type="file" onChange={uploadFile} />
 
               <button
                 disabled={signupForm.isSubmitting}

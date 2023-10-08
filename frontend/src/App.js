@@ -5,13 +5,14 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Browse from "./components/Browse";
 import UserAuth from "./components/UserAuth";
-import ManageUser from "./components/ManageUser";
+// import ManageUser from "./components/ManageUser";
 import UpdateUser from "./components/UpdateUser";
 import NotFound from "./components/NotFound";
 import Navbar from "./components/Navbar";
 import { AppProvider } from "./AppContext";
 import AddProduct from "./components/AddProduct";
 import Product from "./components/Product";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -33,15 +34,16 @@ function App() {
               }
               path="/add"
             />
-            <Route
+            {/* <Route
               element={
                 <UserAuth>
                   <ManageUser />
                 </UserAuth>
               }
               path="/manageuser"
-            />
+            /> */}
             <Route element={<UpdateUser />} path="/updateuser/:id" />
+            <Route element={<UserAuth><Profile /></UserAuth>} path="/profile" />
             <Route element={<Product />} path="/product/:id" />
             <Route element={<NotFound />} path="*" />
           </Routes>

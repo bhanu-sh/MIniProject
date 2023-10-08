@@ -1,32 +1,32 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import UseAppContext from "../AppContext";
 import "../App.css";
 
 const Navbar = () => {
   const { loggedin, logout } = UseAppContext();
 
-  const [currentUser, setCurrentUser] = useState(
-    JSON.parse(sessionStorage.getItem("user"))
-  );
+  const [currentUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
   const displayUserOption = () => {
     if (loggedin) {
       return (
         <>
-          <li className="nav-item">
+          <li className="nav-item mt-1 me-2">
             <button className="btn btn-danger" onClick={logout}>
               Logout
             </button>
           </li>
           <li>
-            <img
-              height={50}
-              width={50}
-              className="rounded-circle"
-              src={"http://localhost:5000/" + currentUser.avatar}
-              alt="avatar"
-            />
+            <Link to="/profile">
+              <img
+                height={50}
+                width={50}
+                className="rounded-circle"
+                src={"http://localhost:5000/" + currentUser.avatar}
+                alt="avatar"
+              />
+            </Link>
           </li>
         </>
       );
@@ -78,11 +78,11 @@ const Navbar = () => {
                 Browse
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/manageuser">
                 Manage User
               </NavLink>
-            </li>
+            </li> */}
             {loggedin ? (
               <>
                 <li className="nav-item">
