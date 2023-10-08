@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import furnitureList from "./dummydata";
+import { Link } from 'react-router-dom';
 
 const Browse = () => {
   const [furnitureData, setFurnitureData] = useState(furnitureList);
@@ -20,9 +21,9 @@ const Browse = () => {
             <h3>{furniture.year}</h3>
             <h2>&#8377; {furniture.price}</h2>
             <div className="">
-              <a href={"/product/"+furniture._id}>
+              <Link to={"/product/"+furniture._id}>
                 <button className="btn btn-success text-center">Buy Now</button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

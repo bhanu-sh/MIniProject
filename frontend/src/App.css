@@ -22,7 +22,7 @@
 }
 
 .tagline{
-  height: 20vh;
+  padding-bottom: 10%;
 }
 
 .img-resize{
@@ -30,12 +30,11 @@
   
 }
 
-.nav-height{
-  height: 6vh;
+.vh-94{
+  height: 94vh;
 }
 
 .header{
-  height: 94vh;
   background-image: url(../public/Assets/brown-furniture-ideas-hero.jpg);
   background-position: center;
   background-repeat: no-repeat;
@@ -44,7 +43,6 @@
 
 .main{
   background-color:#ffffffad ;
-  height: 94vh;
 }
 
 .product-detail p{
@@ -59,4 +57,9 @@
 .furniture-card:hover{
   transform: scale(1.03);
   transition: 0.2s;
+}
+
+.img-250{
+  height: 250px;
+  width: 250px;
 }
