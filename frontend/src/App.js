@@ -16,7 +16,7 @@ import Profile from "./components/Profile";
 
 function App() {
   return (
-    <div>
+    <div className="black">
       <BrowserRouter>
         <AppProvider>
           <Navbar />

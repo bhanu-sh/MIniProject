@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "./Footer";
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -14,7 +15,7 @@ const Home = () => {
 
             <div className="row gx-5">
               <div className="col-md-4 py-2">
-                <div className="card p-3 tagline">
+                <div className="card dark p-3 tagline">
                   <img
                     className="img-fluid rounded m-auto d-block"
                     src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
@@ -25,7 +26,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-md-4 py-2">
-                <div className="card p-3 tagline">
+                <div className="card dark p-3 tagline">
                   <img
                     className="img-fluid rounded m-auto d-block"
                     src="https://cdn-icons-png.flaticon.com/512/1198/1198368.png"
@@ -36,7 +37,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-md-4 py-2">
-                <div className="card p-3 tagline">
+                <div className="card dark p-3 tagline">
                   <img
                     className="img-fluid rounded m-auto d-block"
                     src="https://cdn-icons-png.flaticon.com/512/5530/5530525.png"
@@ -49,11 +50,10 @@ const Home = () => {
             </div>
 
             <div className="pt-5">
-              <h2>Click to see furnitures</h2>
               <a href="#b0">
                 <img
                   className="img-fluid rounded mx-auto d-block"
-                  src="https://cdn-icons-png.flaticon.com/512/59/59690.png"
+                  src="https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png"
                   width={100}
                   alt=""
                 />
@@ -117,8 +117,10 @@ const Home = () => {
               </div>
             </div>
           </div>
-
-          <button className="btn btn-dark">All Products</button>
+          <Link to="/browse">
+            <button className="btn btn-dark">All Products</button>
+          </Link>
+          
 
           
 

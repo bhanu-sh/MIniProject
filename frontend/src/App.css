@@ -1,65 +1,102 @@
-.myclass{
+
+body{
+  color: white;
+  background: rgb(3,0,30);
+  background: linear-gradient(180deg, rgba(3,0,30,1) 40%, rgba(115,3,192,1) 60%, rgba(236,56,188,1) 80%, rgba(253,239,249,1) 100%);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.bg-black{
+  background-color: black;
+}
+
+.myclass {
   color: crimson;
   font-size: 30px;
 }
 
-.nav-item .active{
+.navbar {
+  background-color: black;
+}
+
+li a {
+  color: white !important;
+}
+
+.nav-item .active {
   font-weight: bold;
   border-bottom: 2px solid red;
   color: red !important;
 }
 
-.navbar-brand{
+.navbar-brand {
   font-weight: bolder;
   color: red;
 }
 
-.brand{
+.brand {
   font-weight: bolder;
   color: red;
   font-size: 400%;
   text-shadow: 2px 2px 5px black;
 }
 
-.tagline{
+.main {
+  color: white;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 7%,
+    rgba(0, 0, 0, 0.3029586834733894) 100%
+  );
+}
+
+.tagline {
   padding-bottom: 10%;
 }
 
-.img-resize{
-  height: 300px;
-  
+.dark {
+  background: rgb(0, 0, 0) !important;
+  background: linear-gradient(
+    153deg,
+    rgba(0, 0, 0, 0.5) 7%,
+    rgba(0, 0, 0, 0.2) 100%
+  ) !important;
+  color: white;
+  border: 2px solid rgb(37, 37, 37);
 }
 
-.vh-94{
+.img-resize {
+  height: 300px;
+}
+
+.vh-94 {
   height: 94vh;
 }
 
-.header{
+.header {
   background-image: url(../public/Assets/brown-furniture-ideas-hero.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.main{
-  background-color:#ffffffad ;
-}
-
-.product-detail p{
+.product-detail p {
   font-size: larger;
   font-weight: 400;
 }
 
-.furniture-card{
+.furniture-card {
   transform: scale(1);
 }
 
-.furniture-card:hover{
+.furniture-card:hover {
   transform: scale(1.03);
   transition: 0.2s;
 }
 
-.img-250{
+.img-250 {
   height: 250px;
   width: 250px;
 }

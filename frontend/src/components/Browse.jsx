@@ -64,7 +64,7 @@ const Browse = () => {
 
   return (
     <div>
-      <header className="bg-dark text-white">
+      <header className="text-white">
         <div className="container py-5">
           <h1 className="text-center">Browse Furnitures</h1>
           <hr />
@@ -105,6 +105,8 @@ const Browse = () => {
           </div>
         </div>
       </header>
+
+      <hr />
 
       <div className="container">
         <div className="row" >{displayData()}</div>

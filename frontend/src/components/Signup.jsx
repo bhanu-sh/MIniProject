@@ -91,7 +91,7 @@ const Signup = () => {
     <div>
       <div className="col-md-4 mx-auto">
         <div className="card shadow">
-          <div className="card-body">
+          <div className="card-body ">
             <form onSubmit={signupForm.handleSubmit}>
               <h3 className="text-center">Signup Form</h3>
               <hr />

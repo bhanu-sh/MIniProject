@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import UseAppContext from "../AppContext";
 import "../App.css";
 
 const Navbar = () => {
   const { loggedin, logout } = UseAppContext();
-
-  const [currentUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
   const displayUserOption = () => {
     if (loggedin) {
@@ -16,17 +14,6 @@ const Navbar = () => {
             <button className="btn btn-danger" onClick={logout}>
               Logout
             </button>
-          </li>
-          <li>
-            <Link to="/profile">
-              <img
-                height={50}
-                width={50}
-                className="rounded-circle"
-                src={"http://localhost:5000/" + currentUser.avatar}
-                alt="avatar"
-              />
-            </Link>
           </li>
         </>
       );
@@ -50,9 +37,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary nav-height">
+    <nav className="navbar navbar-expand-lg text-white nav-height">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <a className="navbar-brand " href="/">
           ReFurnished
         </a>
         <button
@@ -67,8 +54,8 @@ const Navbar = () => {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+            <li className="nav-item ">
               <NavLink className="nav-link" to="/">
                 Home
               </NavLink>
@@ -96,6 +83,23 @@ const Navbar = () => {
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             {displayUserOption()}
+            {
+              loggedin ?
+                <>
+                  <li>
+                    <Link to="/profile">
+                      <img
+                        height={50}
+                        width={50}
+                        className="rounded-circle"
+                        src={"/Assets/defaultPfp.webp"}
+                        alt="avatar"
+                      />
+                    </Link>
+                  </li>
+                </>
+              : null
+            }
           </ul>
         </div>
       </div>
