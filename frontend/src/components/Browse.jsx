@@ -21,7 +21,7 @@ const Browse = () => {
             <h3>{furniture.year}</h3>
             <h2>&#8377; {furniture.price}</h2>
             <div className="">
-              <Link to={"/product/"+furniture._id}>
+              <Link to={"/product/"+furniture.id}>
                 <button className="btn btn-success text-center">Buy Now</button>
               </Link>
             </div>
@@ -76,7 +76,7 @@ const Browse = () => {
           />
 
           <div className="row mt-4">
-            <div className="col-md-5">
+            {/* <div className="col-md-5">
               <select
                 className="form-control w-25 mt-4"
                 onChange={(e) => handleTypeCheckboxChange(e.target.value)}
@@ -88,7 +88,7 @@ const Browse = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
             <div className="col-md-4 my-auto">
               {["Sofa", "Bed", "Table", "Chair"].map((type) => (

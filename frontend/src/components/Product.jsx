@@ -1,24 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import furnitureList from "./dummydata";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Product = () => {
+  const { id } = useParams();
+  const [furnitureData, setFurnitureData] = useState(null);
+  const navigate = useNavigate();
+  const currencyFormat = (num) => {
+    return "₹ " + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
+
+  useEffect(() => {
+    // Use Array.find() to find the furniture object by ID
+    const selectedFurniture = furnitureList.find(
+      (item) => item.id === parseInt(id, 10)
+    );
+
+    if (selectedFurniture) {
+      setFurnitureData(selectedFurniture);
+      console.log(selectedFurniture.name);
+    } else {
+      navigate("/404");
+    }
+  }, [id]);
+
+  if (!furnitureData) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <div className="container">
+    <div className="container vh-100 card p-0">
       <div className="row">
-        <div className="card col-md-6">
-          <img
-            src="https://m.media-amazon.com/images/I/418QpEn9JKL._AC_UF894,1000_QL80_DpWeblab_.jpg"
-            alt="chair"
-            className="img-fluid rounded m-auto d-block"
-          />
+        <div className="col-md-4">
+          <img className="card img-fluid shadow" src={furnitureData.image} alt="" />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-8">
           <div className="p-5">
-            <h1>Product Name</h1>
-            <h2>Price</h2>
-            <ul className="product-detail">
-              <li><p>Type: Product type</p></li>
-              <li><p>Year: 2022</p></li>
-            </ul>
+            <h1>{furnitureData.name}</h1>
+            <p>Year: {furnitureData.year}</p>
+            <p>Type: {furnitureData.type}</p>
+            <h6>MRP: {currencyFormat(furnitureData.price)}</h6>
+            <hr />
+            <h4>Description:</h4>
+            <p>{furnitureData.description}</p>
+            <hr />
+            <button className="btn btn-success">Buy Now</button>
           </div>
         </div>
       </div>

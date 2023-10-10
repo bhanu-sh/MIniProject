@@ -83,7 +83,10 @@ const Profile = () => {
               <h5>E-Mail: {userEmail}</h5>
               <button
                 className="btn btn-warning mt-3"
-                onClick={() => setToggleEdit(true)}
+                onClick={() => {
+                  if (toggleEdit) setToggleEdit(false);
+                  else setToggleEdit(true);
+                }}
               >
                 Edit Profile
               </button>
