@@ -13,6 +13,7 @@ import { AppProvider } from "./AppContext";
 import AddProduct from "./components/AddProduct";
 import Product from "./components/Product";
 import Profile from "./components/Profile";
+import MyProducts from "./components/MyProducts";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Browse />} path="/browse" />
+            <Route element={<MyProducts />} path="/myproducts" />
             <Route
               element={
                 <UserAuth>

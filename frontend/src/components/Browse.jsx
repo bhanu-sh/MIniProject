@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import furnitureList from "./dummydata";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Browse = () => {
   const [furnitureData, setFurnitureData] = useState(furnitureList);
@@ -21,7 +21,7 @@ const Browse = () => {
             <h3>{furniture.year}</h3>
             <h2>&#8377; {furniture.price}</h2>
             <div className="">
-              <Link to={"/product/"+furniture.id}>
+              <Link to={"/product/" + furniture.id}>
                 <button className="btn btn-success text-center">Buy Now</button>
               </Link>
             </div>
@@ -76,20 +76,6 @@ const Browse = () => {
           />
 
           <div className="row mt-4">
-            {/* <div className="col-md-5">
-              <select
-                className="form-control w-25 mt-4"
-                onChange={(e) => handleTypeCheckboxChange(e.target.value)}
-              >
-                <option value="">Furniture Type</option>
-                {["Sofa", "Bed", "Table", "Chair"].map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div> */}
-
             <div className="col-md-4 my-auto">
               {["Sofa", "Bed", "Table", "Chair"].map((type) => (
                 <label key={type} className="form-check-label">
@@ -109,7 +95,7 @@ const Browse = () => {
       <hr />
 
       <div className="container">
-        <div className="row" >{displayData()}</div>
+        <div className="row">{displayData()}</div>
       </div>
     </div>
   );
