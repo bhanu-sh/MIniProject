@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Browse = () => {
-  const { type } = useParams();
+  // const { type } = useParams();
 
   const [furnitureData, setFurnitureData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,7 +25,7 @@ const Browse = () => {
   const displayData = () => {
     return furnitureData.map((furniture) => (
       <div className="col-md-3 py-2 furniture-card " 
-      // key={furniture.type}
+      key={furniture.type}
       >
         <div className="card">
           <img
@@ -67,8 +67,9 @@ const Browse = () => {
         selectedTypes.includes(furniture.type)
       );
     }
-
+    
     setFurnitureData(filteredData);
+    //eslint-disable-next-line
   }, [searchQuery, selectedTypes]);
 
   const handleTypeCheckboxChange = (type) => {

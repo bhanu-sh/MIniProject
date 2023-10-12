@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import UseAppContext from "../AppContext";
 import "../App.css";
 
@@ -8,16 +8,24 @@ const Navbar = () => {
   const userJSON = sessionStorage.user;
   const user = userJSON ? JSON.parse(userJSON) : null;
   const { loggedin, logout } = UseAppContext();
+  const navigate = useNavigate();
 
   const displayUserOption = () => {
     if (loggedin) {
       return (
         <>
-          <li className="nav-item mt-1 me-2">
-            <button className="btn btn-danger" onClick={logout}>
-              Logout
-            </button>
-          </li>
+          <div className="row mx-auto">
+            <li className="nav-item col">
+              <button className="btn btn-danger w-100" onClick={logout}>
+                Logout
+              </button>
+            </li>
+            <li className="nav-item col">
+              <button className="btn btn-secondary w-100" onClick={() => navigate("/profile")} >
+                Profile
+              </button>
+            </li>
+          </div>
         </>
       );
     } else {
@@ -86,48 +94,20 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 {user && user._id === "65228b07a9c9f88468ea99a5" ? (
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to="/manageuser">
-                      Manage Users
-                    </NavLink>
-                  </li>
+                  <>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" to="/webadmin">
+                        Admin
+                      </NavLink>
+                    </li>
+                  </>
                 ) : null}
               </>
             ) : null}
           </ul>
 
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0  ">
             {displayUserOption()}
-            {
-              loggedin ?
-                <>
-                  <li>
-                    <Link to="/profile">
-                      <img
-                        height={50}
-                        width={50}
-                        className="rounded-circle"
-                        src={"/Assets/defaultPfp.webp"}
-                        alt="avatar"
-                      />
-                    </Link>
-                    {/* <div className="dropdown show pe-5">
-                      <button className="btn dropdown-toggle" style={{border: "transparent"}} id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img className='profileImage rounded-circle' height={50}
-                        width={50} src={"/Assets/defaultPfp.webp"} alt='Profile'/>
-                      </button>
-      
-                      <div className="dropdown-menu">                
-                        <li><a className="dropdown-item" href="/myProfile">My Profile</a></li>
-                        <li><a className="dropdown-item" href="/myDashboard">My Dashboard </a></li>
-                        <li><hr class="dropdown-divider"/></li>
-                        <li><a className="dropdown-item" href="/signOut">Signout</a></li>
-                      </div>
-                    </div> */}
-                  </li>
-                </>
-              : null
-            }
           </ul>
         </div>
       </div>

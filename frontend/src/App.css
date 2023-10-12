@@ -1,6 +1,6 @@
 body{
   color: white;
-  background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+  background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%);
   background-repeat: no-repeat;
   min-height: 100vh;
 }
@@ -111,4 +111,8 @@ li a {
 
 .text-red{
   color: red;
+}
+
+.navbar{
+  background-color: rgba(0, 0, 0, 0);
 }

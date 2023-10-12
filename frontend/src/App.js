@@ -22,6 +22,8 @@ import Admin from "./components/Admin";
 function App() {
   const userJSON = sessionStorage.user;
   const user = userJSON ? JSON.parse(userJSON) : null;
+  const admin = process.env.REACT_APP_ADMIN;
+
   return (
     <div className="black">
       <Toaster position="bottom-center" reverseOrder={false} />
@@ -44,35 +46,14 @@ function App() {
               }
               path="/add"
             />
-            {user && user._id === "65228b07a9c9f88468ea99a5" ? (
+            {user && user._id === admin ? (
               <>
-                <Route
-                  element={
-                    <UserAuth>
-                      <ManageUser />
-                    </UserAuth>
-                  }
-                  path="/manageuser"
-                />
-                <Route
-                  element={
-                    <UserAuth>
-                      <AllProducts />
-                    </UserAuth>
-                  }
-                  path="/allproducts"
-                />
-                <Route
-                  element={
-                    <UserAuth>
-                      <Admin />
-                    </UserAuth>
-                  }
-                  path="/webadmin"
-                />
+                {console.log("routed to admin")}
+                <Route element={<ManageUser />} path="/manageuser" />
+                <Route element={<AllProducts />} path="/allproducts" />
+                <Route element={<Admin />} path="/webadmin" />
               </>
-            ) : null}
-
+            ) : console.log("Not routing")}
             <Route element={<UpdateUser />} path="/updateuser/:id" />
             <Route element={<EditProduct />} path="/editproduct/:id" />
             <Route

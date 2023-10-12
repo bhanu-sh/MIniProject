@@ -23,7 +23,7 @@ const MyProducts = () => {
     }
   };
 
-  const handleDeleteProduct = async (productId) => {
+  const handleDeleteProduct = async (productId, productImage) => {
     // Display a confirmation dialog
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this product?"
@@ -53,6 +53,36 @@ const MyProducts = () => {
       } catch (error) {
         console.error("An error occurred:", error);
         toast.error("An error occurred.");
+      }
+      if (productImage) {
+        try {
+          const res = await fetch(
+            `http://localhost:5000/util/deletefile/${productImage}`,
+            {
+              method: "DELETE",
+            }
+          );
+
+          if (res.status === 200) {
+            // Delete was successful
+            // You may want to show a success message or update the product list
+            console.log("Product's Image deleted successfully.");
+            toast.success("Product's Image deleted successfully.");
+            // Refresh the product list after deletion
+            fetchProductData();
+          } else {
+            // Handle errors, show an error message, or take appropriate action
+            console.log("Error deleting product's Image.");
+            toast.error("Error deleting product's Image.");
+          }
+        } catch (error) {
+          console.error("An error occurred in image deletion:", error);
+          toast.error("An error occurred in image deletion.");
+        }
+      }
+      else{
+        console.log("No image found");
+        toast.error("No image found");
       }
     }
   };
@@ -105,7 +135,7 @@ const MyProducts = () => {
                         </div>
                         <div className="col-md-6 my-2">
                           <button
-                            onClick={() => handleDeleteProduct(furniture._id)}
+                            onClick={() => handleDeleteProduct(furniture._id, furniture.image)}
                             className="btn btn-danger shadow text-center w-100"
                           >
                             Delete

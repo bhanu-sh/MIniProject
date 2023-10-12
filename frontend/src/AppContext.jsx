@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const AppContext = createContext();
 
 export const AppProvider = ({children}) => {
-
+    //eslint-disable-next-line
     const [currentUser, setCurrentUser] = useState(
         JSON.parse(sessionStorage.getItem("user"))
     );

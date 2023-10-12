@@ -21,7 +21,6 @@ const UpdateUser = () => {
   useEffect(() => {
     fetchUserData();
     // eslint-disable-next-line
-    
   }, []);
 
   const submitForm = async (values, {setSubmitting}) => {

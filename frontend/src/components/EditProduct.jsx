@@ -13,7 +13,7 @@ const EditProduct = () => {
   const [furnitureData, setFurnitureData] = useState(null);
 
   const uploadFile = async (e) => {
-    if (!e.target.files) return;
+    if (!e.target.files || e.target.files === "") return;
 
     const file = e.target.files[0];
     console.log(file.name);
@@ -59,7 +59,7 @@ const EditProduct = () => {
 
     if (res.status === 200) {
       toast.success("Product Updated Successfully");
-      navigate("/myproducts");
+      navigate("/allproducts");
     }
     else{
       toast.error("Something went wrong");
@@ -70,7 +70,7 @@ const EditProduct = () => {
   return (
     <div>
       {furnitureData &&
-      JSON.parse(sessionStorage.user)._id === furnitureData.user_id ? (
+      (JSON.parse(sessionStorage.user)._id === furnitureData.user_id || JSON.parse(sessionStorage.user)._id === process.env.REACT_APP_ADMIN) ? (
         <div className="container mx-auto row">
           <h1>Edit Product</h1>
           <hr />
