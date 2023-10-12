@@ -4,6 +4,9 @@ import UseAppContext from "../AppContext";
 import "../App.css";
 
 const Navbar = () => {
+
+  const userJSON = sessionStorage.user;
+  const user = userJSON ? JSON.parse(userJSON) : null;
   const { loggedin, logout } = UseAppContext();
 
   const displayUserOption = () => {
@@ -77,6 +80,18 @@ const Navbar = () => {
                     Add Furniture
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/myproducts">
+                    My Furnitures
+                  </NavLink>
+                </li>
+                {user && user._id === "65228b07a9c9f88468ea99a5" ? (
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/manageuser">
+                      Manage Users
+                    </NavLink>
+                  </li>
+                ) : null}
               </>
             ) : null}
           </ul>
@@ -96,6 +111,19 @@ const Navbar = () => {
                         alt="avatar"
                       />
                     </Link>
+                    {/* <div className="dropdown show pe-5">
+                      <button className="btn dropdown-toggle" style={{border: "transparent"}} id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img className='profileImage rounded-circle' height={50}
+                        width={50} src={"/Assets/defaultPfp.webp"} alt='Profile'/>
+                      </button>
+      
+                      <div className="dropdown-menu">                
+                        <li><a className="dropdown-item" href="/myProfile">My Profile</a></li>
+                        <li><a className="dropdown-item" href="/myDashboard">My Dashboard </a></li>
+                        <li><hr class="dropdown-divider"/></li>
+                        <li><a className="dropdown-item" href="/signOut">Signout</a></li>
+                      </div>
+                    </div> */}
                   </li>
                 </>
               : null
@@ -108,3 +136,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

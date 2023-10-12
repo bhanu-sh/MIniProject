@@ -52,7 +52,7 @@ const Home = () => {
             <div className="pt-5">
               <a href="#b0">
                 <img
-                  className="img-fluid rounded mx-auto d-block"
+                  className="img-fluid rounded mx-auto d-block pulldown"
                   src="https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png"
                   width={100}
                   alt=""

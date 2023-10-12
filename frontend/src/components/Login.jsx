@@ -68,7 +68,7 @@ const Login = () => {
   });
 
   return (
-    <div className="py-5 vh-100">
+    <div className="py-5">
       <div className="col-md-3 mx-auto">
         <div className="card shadow">
           <div className="card-body">
