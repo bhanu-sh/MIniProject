@@ -16,7 +16,7 @@ const Home = () => {
 
             <div className="row gx-5">
               <div className="col-md-4 py-2">
-                <div className="card dark p-3 tagline">
+                <div className="card dark p-3 tagline min-card">
                   <img
                     className="img-fluid rounded m-auto d-block"
                     src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
@@ -27,7 +27,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-md-4 py-2">
-                <div className="card dark p-3 tagline">
+                <div className="card dark p-3 tagline min-card">
                   <img
                     className="img-fluid rounded m-auto d-block"
                     src="https://cdn-icons-png.flaticon.com/512/1198/1198368.png"
@@ -38,7 +38,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-md-4 py-2">
-                <div className="card dark p-3 tagline">
+                <div className="card dark p-3 tagline min-card">
                   <img
                     className="img-fluid rounded m-auto d-block"
                     src="https://cdn-icons-png.flaticon.com/512/5530/5530525.png"

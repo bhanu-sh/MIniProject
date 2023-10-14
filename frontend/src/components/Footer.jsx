@@ -1,82 +1,55 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div>
       <footer className="bg-dark text-center text-white  ">
-        {/* Grid container */}
         <div className="container p-4 pb-0">
-          {/* Section: Social media */}
           <section className="mb-4">
-            {/* Facebook */}
-            <a
-              className="btn text-white btn-floating m-1"
-              style={{ backgroundColor: "#3b5998" }}
-              href="#!"
-              role="button"
-            >
-              <i className="fab fa-facebook-f" />
-            </a>
-            {/* Twitter */}
-            <a
-              className="btn text-white btn-floating m-1"
-              style={{ backgroundColor: "#55acee" }}
-              href="#!"
-              role="button"
-            >
-              <i className="fab fa-twitter" />
-            </a>
-            {/* Google */}
-            <a
+            <Link
               className="btn text-white btn-floating m-1"
               style={{ backgroundColor: "#dd4b39" }}
-              href="#!"
+              to="mailto:bhanuelicit@gmail.com"
               role="button"
             >
               <i className="fab fa-google" />
-            </a>
-            {/* Instagram */}
-            <a
+            </Link>
+            <Link
               className="btn text-white btn-floating m-1"
               style={{ backgroundColor: "#ac2bac" }}
-              href="#!"
+              to="https://www.instagram.com/_bhanu_s/"
               role="button"
             >
               <i className="fab fa-instagram" />
-            </a>
-            {/* Linkedin */}
-            <a
+            </Link>
+            <Link
               className="btn text-white btn-floating m-1"
               style={{ backgroundColor: "#0082ca" }}
-              href="#!"
+              to="https://www.linkedin.com/in/bhanu-sharma-a4063b136/"
               role="button"
             >
               <i className="fab fa-linkedin-in" />
-            </a>
-            {/* Github */}
-            <a
+            </Link>
+            <Link
               className="btn text-white btn-floating m-1"
               style={{ backgroundColor: "#333333" }}
-              href="#!"
+              to="https://github.com/bhanu-sh"
               role="button"
             >
               <i className="fab fa-github" />
-            </a>
+            </Link>
           </section>
-          {/* Section: Social media */}
         </div>
-        {/* Grid container */}
-        {/* Copyright */}
         <div
           className="text-center p-3"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
-          © 2023 Copyright:
-          <a className="text-white" href="/">
+          © 2023 Copyright:{" "}
+          <Link className="text-white" to="/">
             ReFurnished
-          </a>
+          </Link>
         </div>
-        {/* Copyright */}
       </footer>
     </div>
   );

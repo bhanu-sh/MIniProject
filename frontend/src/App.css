@@ -45,6 +45,10 @@ background: linear-gradient(to top, #434343, #000000); /* W3C, IE 10+/ Edge, Fir
   text-shadow: 2px 2px 5px black;
 }
 
+.min-card{
+  min-height: 100%;
+}
+
 .main {
   color: white;
   background: rgb(0, 0, 0);

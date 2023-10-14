@@ -36,7 +36,7 @@ const Browse = () => {
 
     return filteredData.map((furniture) =>
       furniture.price ? (
-        <div className="col-md-3 py-2 furniture-card-browse" key={furniture.type}>
+        <div className="col-md-3 py-2 furniture-card-browse" key={furniture._id}>
           <div className="card">
             <img
               className="card img-resize img-fluid"
@@ -65,8 +65,10 @@ const Browse = () => {
   
     const selectOption = (type) => {
       if (selectedTypes.includes(type)) {
+        // Remove the type if it exists in the selectedTypes array
         setSelectedTypes(selectedTypes.filter((t) => t !== type));
       } else {
+        // Add the type if it doesn't exist in the selectedTypes array
         setSelectedTypes([...selectedTypes, type]);
       }
     };
@@ -84,7 +86,7 @@ const Browse = () => {
               value={searchQuery}
               onChange={handleSearchChange}
             />
-  
+          
             <div className="row mt-4">
               <div className="col-md-4 my-auto">
                 <input

@@ -36,7 +36,7 @@ const Product = () => {
   }
 
   return (
-    <div className="container vh-100 p-0">
+    <div className="container vh-100 p-0 mt-5">
       <div className="row">
         <div className="col-md-4">
           <img
@@ -57,7 +57,8 @@ const Product = () => {
             <hr />
             <p>Year: {furnitureData.year}</p>
             <p>Type: {furnitureData.type}</p>
-            {furnitureData.user_id === JSON.parse(sessionStorage.user)._id ? (
+            {sessionStorage.user &&
+            furnitureData.user_id === JSON.parse(sessionStorage.user)._id ? (
               <button
                 className="btn btn-warning"
                 onClick={() => navigate("/editproduct/" + furnitureData._id)}

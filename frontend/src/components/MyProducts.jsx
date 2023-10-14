@@ -118,10 +118,12 @@ const MyProducts = () => {
                     )}
 
                     <div className="card-body shadow">
-                      <h4>Name: {furniture.title}</h4>
-                      <h4>Year: {furniture.year}</h4>
+                      <h4>{furniture.title}</h4>
+                      <h6>Type: {furniture.type}</h6>
+                      <h6>Year: {furniture.year}</h6>
+                      <p className="text-secondary">Seller: {furniture.user_name}</p>
                       {furniture.price ? (
-                        <h2>Price: &#8377; {furniture.price} </h2>
+                        <h5 className="text-success">Price: &#8377; {furniture.price} </h5>
                       ) : (
                         <h6 className="text-danger">Price Not Specified Yet</h6>
                       )}

@@ -3,6 +3,7 @@ const express = require('express');
 
 const userRouter = require('./routers/userRouter');
 const productRouter = require('./routers/productRouter');
+const orderRouter = require('./routers/orderRouter');
 const utilRouter = require('./routers/utils');
 const cors = require('cors');
 
@@ -18,6 +19,7 @@ app.use(cors({
 
 app.use( '/user', userRouter );
 app.use( '/product', productRouter );
+app.use( '/order', orderRouter );
 app.use( '/util', utilRouter );
 
 app.use(express.static('./uploads'));

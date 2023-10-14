@@ -21,7 +21,6 @@ import Admin from "./components/Admin";
 import Pricing from "./components/Pricing";
 import SetPrice from "./components/SetPrice";
 import AdminAuth from "./components/AdminAuth";
-import EditAllProducts from "./components/EditAllProducts";
 import Checkout from "./components/Checkout";
 
 function App() {
@@ -54,7 +53,6 @@ function App() {
             <Route element={<AdminAuth><Pricing /></AdminAuth>} path="/pricing" />
             <Route element={<AdminAuth><SetPrice /></AdminAuth>} path="/setprice/:id" />
             <Route element={<AdminAuth><UpdateUser /></AdminAuth>} path="/updateuser/:id" />
-            <Route element={<AdminAuth><EditAllProducts /></AdminAuth>} path="/manageproduct/:id" />
           </Routes>
 
         </AppProvider>
