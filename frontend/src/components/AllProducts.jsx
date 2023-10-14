@@ -114,11 +114,22 @@ const AllProducts = () => {
                       ) : (
                         <h6 className="text-danger">Price Not Specified Yet</h6>
                       )}
-                      <div className="text-center my-2">
-
-                        <button className="btn btn-warning shadow text-center 2 w-100" onClick={() => navigate("/manageproduct/" + furniture._id)}>
-                          Edit Price
-                        </button>
+                      <div className="row">
+                        <div className="col-md-6 my-2">
+                          <Link to={"/editproduct/" + furniture._id}>
+                            <button className="btn btn-warning shadow text-center 2 w-100">
+                              Edit
+                            </button>
+                          </Link>
+                        </div>
+                        <div className="col-md-6 my-2">
+                          <button
+                            onClick={() => handleDeleteProduct(furniture._id, furniture.image)}
+                            className="btn btn-danger shadow text-center w-100"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

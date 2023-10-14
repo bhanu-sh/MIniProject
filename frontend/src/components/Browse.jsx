@@ -6,6 +6,9 @@ const Browse = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedType = queryParams.get("selectedType");
+  const currencyFormat = (num) => {
+    return "₹ " + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
 
   const [furnitureData, setFurnitureData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,7 +45,7 @@ const Browse = () => {
             />
             <div className="card-body">
               <h3>{furniture.title}</h3>
-              <h4 className="text-success">&#8377; {furniture.price}</h4>
+              <h4 className="text-success">{currencyFormat(furniture.price)}</h4>
               <h6>Type: {furniture.type}</h6>
               <h6>Year: {furniture.year}</h6>
               <p className="text-secondary">Seller: {furniture.user_name}</p>

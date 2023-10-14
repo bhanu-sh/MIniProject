@@ -22,6 +22,7 @@ import Pricing from "./components/Pricing";
 import SetPrice from "./components/SetPrice";
 import AdminAuth from "./components/AdminAuth";
 import EditAllProducts from "./components/EditAllProducts";
+import Checkout from "./components/Checkout";
 
 function App() {
 
@@ -33,19 +34,20 @@ function App() {
           <Navbar />
 
           <Routes>
-            //Normal Routes
+            {/* Normal Routes */}
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Browse />} path="/browse" />
-            <Route element={<MyProducts />} path="/myproducts" />
             <Route element={<Product />} path="/product/:id" />
             <Route element={<NotFound />} path="*" />
-            //User Auth Routes
+            {/* User Auth Routes */}
             <Route element={<UserAuth><AddProduct /></UserAuth>} path="/add" />
+            <Route element={<UserAuth><MyProducts /></UserAuth>} path="/myproducts" />
             <Route element={<UserAuth><EditProduct /></UserAuth>} path="/editproduct/:id" />
             <Route element={<UserAuth><Profile /></UserAuth>} path="/profile"/>
-            //Admin Auth Routes
+            <Route element={<UserAuth><Checkout /></UserAuth>} path="/checkout/:id" />
+            {/* Admin Auth Routes */}
             <Route element={<AdminAuth><ManageUser /></AdminAuth>} path="/manageuser" />
             <Route element={<AdminAuth><AllProducts /></AdminAuth>} path="/allproducts" />
             <Route element={<AdminAuth><Admin /></AdminAuth>} path="/webadmin" />
@@ -54,7 +56,7 @@ function App() {
             <Route element={<AdminAuth><UpdateUser /></AdminAuth>} path="/updateuser/:id" />
             <Route element={<AdminAuth><EditAllProducts /></AdminAuth>} path="/manageproduct/:id" />
           </Routes>
-          
+
         </AppProvider>
       </BrowserRouter>
     </div>

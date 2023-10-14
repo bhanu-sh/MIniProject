@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import UseAppContext from "../AppContext";
 import "../App.css";
 
@@ -7,8 +7,8 @@ const Navbar = () => {
 
   const userJSON = sessionStorage.user;
   const user = userJSON ? JSON.parse(userJSON) : null;
+
   const { loggedin, logout } = UseAppContext();
-  const navigate = useNavigate();
 
   const displayUserOption = () => {
     if (loggedin) {
@@ -24,7 +24,7 @@ const Navbar = () => {
               <Link to={"/profile"}>
                 {user.avatar ? <img src={"http://localhost:5000/" + user.avatar} width={50} 
                 className= "rounded-circle"
-                alt="" /> : <img src="http://localhost:5000/defaultPfp.webp" width={50} />
+                alt="" /> : <img src="http://localhost:5000/defaultPfp.webp" alt="" width={50} />
                 }
                 
               </Link>

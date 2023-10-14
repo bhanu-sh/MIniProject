@@ -95,8 +95,8 @@ background: linear-gradient(to top, #434343, #000000); /* W3C, IE 10+/ Edge, Fir
 }
 
 .furniture-card-browse:hover {
-  transform: scale(1.03);
-  transition: 0.2s;
+  transform: scale(1.02);
+  transition: 0.1s;
 }
 
 .img-250 {
