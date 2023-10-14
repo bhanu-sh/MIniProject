@@ -23,7 +23,7 @@ const Navbar = () => {
             <li className="nav-item col">
               <Link to={"/profile"}>
                 {user.avatar ? <img src={"http://localhost:5000/" + user.avatar} width={50} 
-                className= "rounded-circle"
+                className= "rounded-circle pfp"
                 alt="" /> : <img src="http://localhost:5000/defaultPfp.webp" alt="" width={50} />
                 }
                 

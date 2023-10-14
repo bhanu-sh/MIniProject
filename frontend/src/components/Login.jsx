@@ -16,7 +16,6 @@ const Login = () => {
     },
 
     onSubmit: async (values) => {
-      console.log(values);
 
       const res = await fetch("http://localhost:5000/user/authenticate", {
         method: "POST",
@@ -33,17 +32,14 @@ const Login = () => {
           icon: "success",
           title: "Login Successful",
         })
-
           .then((result) => {
-            navigate("/");
+            navigate(-2);
           })
           .catch((err) => {
             console.log(err);
           });
 
         const data = await res.json();
-
-        console.log(data);
 
         sessionStorage.setItem("user", JSON.stringify(data));
 

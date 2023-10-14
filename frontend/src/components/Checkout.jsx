@@ -1,5 +1,8 @@
+import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import * as Yup from "yup";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -8,6 +11,18 @@ const Checkout = () => {
   const currencyFormat = (num) => {
     return "₹ " + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
+
+  const OrderSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(4, "Min. 4 characters required")
+      .required("Name is Required"),
+    address: Yup.object().shape({
+      line1: Yup.string().required("Address is Required"),
+      state: Yup.string().required("State is Required"),
+      city: Yup.string().required("City is Required"),
+      pincode: Yup.number().required("Pincode is Required"),
+    }),
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +46,67 @@ const Checkout = () => {
     fetchData();
   }, [id, navigate]);
 
+  const orderForm = useFormik({
+    initialValues: {
+      user_id: "",
+      product_id: "",
+      product_name: "",
+      image: "",
+      price: "",
+      name: "",
+      address: {
+        line1: "",
+        city: "",
+        state: "",
+        pincode: "",
+      },
+    },
+    onSubmit: async (values, { setSubmitting }) => {
+      setSubmitting(true);
+      values.user_id = JSON.parse(sessionStorage.user)._id;
+      values.product_id = furnitureData._id;
+      values.product_name = furnitureData.title;
+      values.image = furnitureData.image;
+      values.price = furnitureData.price;
+      setTimeout(() => {
+        console.log(values);
+        setSubmitting(false);
+      }, 3000);
+
+      // send the data to the server
+
+      const res = await fetch("http://localhost:5000/order/add", {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res.status);
+
+      if (res.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Nice",
+          text: "Your Order is placed successfully",
+        })
+          .then((result) => {
+            navigate("/myorders");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops!!",
+          text: "Something went wrong",
+        });
+      }
+    },
+    validationSchema: OrderSchema,
+  });
+
   if (!furnitureData) {
     return <p>Loading...</p>;
   }
@@ -50,9 +126,13 @@ const Checkout = () => {
               <li className="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
                   <h6 className="my-0">{furnitureData.title}</h6>
-                  <small className="text-muted">Type: {furnitureData.type}</small>
+                  <small className="text-muted">
+                    Type: {furnitureData.type}
+                  </small>
                 </div>
-                <span className="text-muted">{currencyFormat(furnitureData.price)}</span>
+                <span className="text-muted">
+                  {currencyFormat(furnitureData.price)}
+                </span>
               </li>
               {/* <li className="list-group-item d-flex justify-content-between bg-light">
                 <div className="text-success">
@@ -66,6 +146,7 @@ const Checkout = () => {
                 <strong>{currencyFormat(furnitureData.price)}</strong>
               </li>
             </ul>
+
             <form className="card p-2">
               <div className="input-group">
                 <input
@@ -83,72 +164,107 @@ const Checkout = () => {
           </div>
           <div className="col-md-8 order-md-1">
             <h4 className="mb-3">Billing address</h4>
-            <form className="needs-validation" noValidate="">
+
+            <form onSubmit={orderForm.handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="firstName">Full Name</label>
+                <label>Full Name</label>
+                <span
+                  style={{ fontSize: "0.8em", color: "red", marginLeft: 20 }}
+                >
+                  {orderForm.touched.name && orderForm.errors.name}
+                </span>
                 <input
                   type="text"
                   className="form-control"
-                  id="firstName"
-                  placeholder=""
-                  defaultValue=""
-                  required=""
+                  name="name"
+                  onChange={orderForm.handleChange}
+                  value={orderForm.values.name}
                 />
-                <div className="invalid-feedback">
-                  Valid first name is required.
-                </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="address">Address</label>
+                <label>Address</label>
+                {orderForm.touched.address &&
+                  orderForm.touched.address.line1 && (
+                    <span
+                      style={{
+                        fontSize: "0.8em",
+                        color: "red",
+                        marginLeft: 20,
+                      }}
+                    >
+                      {orderForm.errors.address &&
+                        orderForm.errors.address.line1}
+                    </span>
+                  )}
                 <input
                   type="text"
                   className="form-control"
-                  name="line1"
-                  required=""
+                  name="address.line1"
+                  onChange={orderForm.handleChange}
+                  value={orderForm.values.address.line1}
                 />
-                <div className="invalid-feedback">
-                  Please enter your shipping address.
-                </div>
               </div>
               <div className="row">
                 <div className="col-md-4 mb-3">
-                  <label htmlFor="state">State</label>
+                  <label>State</label>
+                  <span
+                    style={{
+                      fontSize: "0.8em",
+                      color: "red",
+                      marginLeft: 20,
+                    }}
+                  >
+                    {orderForm.errors.address && orderForm.errors.address.state}
+                  </span>
                   <select
                     className="custom-select d-block w-100 form-control"
-                    id="state"
-                    required=""
+                    name="address.state"
+                    onChange={orderForm.handleChange}
+                    value={orderForm.values.address.state}
                   >
                     <option value="">Choose...</option>
                     <option>Uttar Pradesh</option>
                   </select>
-                  <div className="invalid-feedback">
-                    Please provide a valid state.
-                  </div>
                 </div>
                 <div className="col-md-5 mb-3">
-                  <label htmlFor="country">City</label>
+                  <label>City</label>
+                  <span
+                    style={{
+                      fontSize: "0.8em",
+                      color: "red",
+                      marginLeft: 20,
+                    }}
+                  >
+                    {orderForm.errors.address && orderForm.errors.address.city}
+                  </span>
                   <select
                     className="custom-select d-block w-100 form-control"
-                    id="country"
-                    required=""
+                    name="address.city"
+                    onChange={orderForm.handleChange}
+                    value={orderForm.values.address.city}
                   >
                     <option value="">Choose...</option>
                     <option>Lucknow</option>
                   </select>
-                  <div className="invalid-feedback">
-                    Please select a valid City.
-                  </div>
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="zip">Pin Code</label>
+                  <label>Pin Code</label>
+                  <span
+                    style={{
+                      fontSize: "0.8em",
+                      color: "red",
+                      marginLeft: 20,
+                    }}
+                  >
+                    {orderForm.errors.address && orderForm.errors.address.pincode}
+                  </span>
                   <input
                     type="text"
                     className="form-control"
-                    id="zip"
-                    placeholder=""
-                    required=""
+                    name="address.pincode"
+                    onChange={orderForm.handleChange}
+                    value={orderForm.values.address.pincode}
                   />
-                  <div className="invalid-feedback">Pin code required.</div>
                 </div>
               </div>
               <h4 className="mb-3">Payment</h4>
@@ -159,7 +275,7 @@ const Checkout = () => {
                     name="paymentMethod"
                     type="radio"
                     className="custom-control-input"
-                    defaultChecked= ""
+                    defaultChecked=""
                     required=""
                   />
                   <label className="custom-control-label" htmlFor="credit">
@@ -169,10 +285,21 @@ const Checkout = () => {
               </div>
               <hr className="mb-4" />
               <button
-                className="btn btn-primary btn-lg btn-block"
+                disabled={orderForm.isSubmitting}
                 type="submit"
+                className="btn btn-primary btn-lg btn-block"
               >
-                Place Order
+                {orderForm.isSubmitting ? (
+                  <>
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      aria-hidden="true"
+                    ></span>
+                    <span>Loading ...</span>
+                  </>
+                ) : (
+                  "Place Order"
+                )}
               </button>
             </form>
           </div>

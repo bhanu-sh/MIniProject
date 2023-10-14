@@ -5,6 +5,16 @@ body{
   min-height: 100vh;
 }
 
+.pfp{
+  border: 1px solid black;
+  transition: 0.2s;
+}
+
+.pfp:hover{
+  border: 1px solid red;
+  transition: 0.2s;
+}
+
 .bg-black{
   background-color: black;
 }
