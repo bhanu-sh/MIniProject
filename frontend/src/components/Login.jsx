@@ -5,7 +5,6 @@ import UseAppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   const { setLoggedin } = UseAppContext();
@@ -19,55 +18,53 @@ const Login = () => {
     onSubmit: async (values) => {
       console.log(values);
 
-      const res = await fetch('http://localhost:5000/user/authenticate', {
-        method: 'POST',
+      const res = await fetch("http://localhost:5000/user/authenticate", {
+        method: "POST",
         body: JSON.stringify(values),
         headers: {
-          'Content-Type' : 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       });
 
       console.log(res.status);
 
-      if(res.status === 200){
+      if (res.status === 200) {
         Swal.fire({
           icon: "success",
           title: "Login Successful",
         })
 
-        .then((result) => {
-          navigate("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((result) => {
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
         const data = await res.json();
 
         console.log(data);
 
-        sessionStorage.setItem('user', JSON.stringify(data));
+        sessionStorage.setItem("user", JSON.stringify(data));
 
         setLoggedin(true);
-
-      }else if(res.status === 401){
+      } else if (res.status === 401) {
         Swal.fire({
           icon: "error",
-          title:"Invalid Credentials",
-          text: "Email or password is incorrect"
-        })
-      }else{
+          title: "Invalid Credentials",
+          text: "Email or password is incorrect",
+        });
+      } else {
         Swal.fire({
           icon: "error",
-          title:'Error Occured!',
-          text: "SOmething went wrong"
-        })
+          title: "Error Occured!",
+          text: "SOmething went wrong",
+        });
       }
-
     },
   });
 
-  return (
+  return !sessionStorage.user ? (
     <div className="py-5">
       <div className="col-md-3 mx-auto">
         <div className="card shadow">
@@ -100,7 +97,16 @@ const Login = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <div className="py-5">
+      <div className="col-md-3 mx-auto">
+        <div className="card shadow">
+          <div className="card-body">
+            <h2 className="text-center my-5">You are already logged in</h2>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
-
 export default Login;

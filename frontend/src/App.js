@@ -18,6 +18,10 @@ import EditProduct from "./components/EditProduct";
 import { Toaster } from "react-hot-toast";
 import AllProducts from "./components/AllProducts";
 import Admin from "./components/Admin";
+import Pricing from "./components/Pricing";
+import SetPrice from "./components/SetPrice";
+import AdminAuth from "./components/AdminAuth";
+import EditAllProducts from "./components/EditAllProducts";
 
 function App() {
   const userJSON = sessionStorage.user;
@@ -36,7 +40,6 @@ function App() {
             <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Browse />} path="/browse" />
-            <Route element={<Browse />} path="/browse/:type" />
             <Route element={<MyProducts />} path="/myproducts" />
             <Route
               element={
@@ -46,16 +49,15 @@ function App() {
               }
               path="/add"
             />
-            {user && user._id === admin ? (
-              <>
-                {console.log("routed to admin")}
-                <Route element={<ManageUser />} path="/manageuser" />
-                <Route element={<AllProducts />} path="/allproducts" />
-                <Route element={<Admin />} path="/webadmin" />
-              </>
-            ) : console.log("Not routing")}
-            <Route element={<UpdateUser />} path="/updateuser/:id" />
-            <Route element={<EditProduct />} path="/editproduct/:id" />
+            
+            <Route element={<AdminAuth><ManageUser /></AdminAuth>} path="/manageuser" />
+            <Route element={<AdminAuth><AllProducts /></AdminAuth>} path="/allproducts" />
+            <Route element={<AdminAuth><Admin /></AdminAuth>} path="/webadmin" />
+            <Route element={<AdminAuth><Pricing /></AdminAuth>} path="/pricing" />
+            <Route element={<AdminAuth><SetPrice /></AdminAuth>} path="/setprice/:id" />
+            <Route element={<AdminAuth><UpdateUser /></AdminAuth>} path="/updateuser/:id" />
+            <Route element={<AdminAuth><EditAllProducts /></AdminAuth>} path="/manageproduct/:id" />
+            <Route element={<UserAuth><EditProduct /></UserAuth>} path="/editproduct/:id" />
             <Route
               element={
                 <UserAuth>

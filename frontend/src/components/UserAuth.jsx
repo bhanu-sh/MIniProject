@@ -3,8 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const UserAuth = ({children}) => {
-    //eslint-disable-next-line
-    const [currentUser, setCurrentUser] = useState(
+    const [currentUser] = useState(
         JSON.parse(sessionStorage.getItem("user"))
     );
 

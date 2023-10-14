@@ -35,16 +35,14 @@ const Product = () => {
   }
 
   return (
-    <div className="container vh-100 card p-0">
+    <div className="container vh-100 p-0">
       <div className="row">
         <div className="col-md-4">
-          <img className="card img-fluid shadow" src={furnitureData.image} alt="" />
+          <img className="card img-fluid shadow" src={"http://localhost:5000/" + furnitureData.image} alt="" />
         </div>
         <div className="col-md-8">
           <div className="p-5">
-            <h1>{furnitureData.name}</h1>
-            <p>Year: {furnitureData.year}</p>
-            <p>Type: {furnitureData.type}</p>
+            <h1>{furnitureData.title}</h1>
             <h6>MRP: 
               {/* {currencyFormat()} */}
               {furnitureData.price}
@@ -53,6 +51,8 @@ const Product = () => {
             <h4>Description:</h4>
             <p>{furnitureData.description}</p>
             <hr />
+            <p>Year: {furnitureData.year}</p>
+            <p>Type: {furnitureData.type}</p>
             <button className="btn btn-success">Buy Now</button>
           </div>
         </div>

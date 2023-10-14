@@ -1,6 +1,6 @@
 body{
-  color: white;
-  background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%);
+  color: black;
+  background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
   background-repeat: no-repeat;
   min-height: 100vh;
 }
@@ -26,6 +26,11 @@ li a {
   font-weight: bold;
   border-bottom: 2px solid red;
   color: red !important;
+}
+
+.bg-filter{
+background: linear-gradient(to top, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .navbar-brand {
@@ -85,11 +90,11 @@ li a {
   font-weight: 400;
 }
 
-.furniture-card {
+.furniture-card-browse {
   transform: scale(1);
 }
 
-.furniture-card:hover {
+.furniture-card-browse:hover {
   transform: scale(1.03);
   transition: 0.2s;
 }
@@ -114,5 +119,5 @@ li a {
 }
 
 .navbar{
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgb(0, 0, 0);
 }

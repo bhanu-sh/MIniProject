@@ -86,53 +86,44 @@ const AllProducts = () => {
         {productData.map((furniture) => {
           return (
             <>
-              <div className="col-md-3 py-2 furniture-card">
-                <div className="card shadow">
-                  {furniture.image ? (
-                    <img
-                      className="card img-resize img-fluid"
-                      src={"http://localhost:5000/" + furniture.image}
-                      alt=""
-                    />
-                  ) : (
-                    <img
-                      className="card img-resize img-fluid"
-                      src={
-                        "https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg"
-                      }
-                      alt=""
-                    />
-                  )}
-
-                  <div className="card-body shadow">
-                    <h4>Name: {furniture.title}</h4>
-                    <h4>Year: {furniture.year}</h4>
-                    {furniture.price ? (
-                      <h2>Price: &#8377; {furniture.price} </h2>
+                <div className="col-md-3 py-2 furniture-card">
+                  <div className="card shadow">
+                    {furniture.image ? (
+                      <img
+                        className="card img-resize img-fluid"
+                        src={"http://localhost:5000/" + furniture.image}
+                        alt=""
+                      />
                     ) : (
-                      <h6 className="text-danger">Price Not Specified Yet</h6>
+                      <img
+                        className="card img-resize img-fluid"
+                        src={
+                          "https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg"
+                        }
+                        alt=""
+                      />
                     )}
-                    <div className="row">
-                      <div className="col-md-6 my-2">
-                        <Link to={"/editproduct/" + furniture._id}>
-                          <button className="btn btn-warning shadow text-center 2 w-100">
-                            Edit
-                          </button>
-                        </Link>
-                      </div>
-                      <div className="col-md-6 my-2">
-                        <button
-                          onClick={() => handleDeleteProduct(furniture._id, furniture.image)}
-                          className="btn btn-danger shadow text-center w-100"
-                        >
-                          Delete
+
+                    <div className="card-body shadow">
+                      <h4>{furniture.title}</h4>
+                      <h6>Type: {furniture.type}</h6>
+                      <h6>Year: {furniture.year}</h6>
+                      <p className="text-secondary">Seller: {furniture.user_name}</p>
+                      {furniture.price ? (
+                        <h5 className="text-success">Price: &#8377; {furniture.price} </h5>
+                      ) : (
+                        <h6 className="text-danger">Price Not Specified Yet</h6>
+                      )}
+                      <div className="text-center my-2">
+
+                        <button className="btn btn-warning shadow text-center 2 w-100" onClick={() => navigate("/manageproduct/" + furniture._id)}>
+                          Edit Price
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </>
+              </>
           );
         })}
       </div>

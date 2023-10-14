@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import UseAppContext from "../AppContext";
 import "../App.css";
 
@@ -15,15 +15,20 @@ const Navbar = () => {
       return (
         <>
           <div className="row mx-auto">
-            <li className="nav-item col">
+            <li className="nav-item col my-auto">
               <button className="btn btn-danger w-100" onClick={logout}>
                 Logout
               </button>
             </li>
             <li className="nav-item col">
-              <button className="btn btn-secondary w-100" onClick={() => navigate("/profile")} >
-                Profile
-              </button>
+              <Link to={"/profile"}>
+                {user.avatar ? <img src={"http://localhost:5000/" + user.avatar} width={50} 
+                className= "rounded-circle"
+                alt="" /> : <img src="http://localhost:5000/defaultPfp.webp" width={50} />
+                }
+                
+              </Link>
+              
             </li>
           </div>
         </>
@@ -50,11 +55,11 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg text-white nav-height">
       <div className="container-fluid">
-        <a className="navbar-brand " href="/">
+        <Link className="navbar-brand " to="/">
           ReFurnished
-        </a>
+        </Link>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler bg-danger"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -93,6 +98,7 @@ const Navbar = () => {
                     My Furnitures
                   </NavLink>
                 </li>
+                
                 {user && user._id === "65228b07a9c9f88468ea99a5" ? (
                   <>
                     <li className="nav-item">

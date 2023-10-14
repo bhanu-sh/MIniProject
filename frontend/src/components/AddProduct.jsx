@@ -16,7 +16,7 @@ const AddProduct = () => {
     description: Yup.string()
       .min(4, "Min. 4 characters required")
       .required("Product Description is Required"),
-      year: Yup.number()
+    year: Yup.number()
       .typeError("Year must be a valid number")
       .required("Year of Purchase is Required")
       .integer("Year must be a whole number (no decimals)")
@@ -24,7 +24,7 @@ const AddProduct = () => {
       .min(4, "Year should be a 4-digit number")
       .test("valid-year", "Please enter a valid year", (value) => {
         return value >= 1950 && value <= 2023;
-      })
+      }),
   });
 
   console.log(JSON.parse(sessionStorage.user)._id);
@@ -36,7 +36,9 @@ const AddProduct = () => {
       description: "",
       year: "",
       image: "",
+      price: "",
       user_id: JSON.parse(sessionStorage.user)._id,
+      user_name: JSON.parse(sessionStorage.user).name,
     },
     onSubmit: async (values, { setSubmitting }) => {
       values.image = selFile;
@@ -129,10 +131,10 @@ const AddProduct = () => {
                 value={productForm.values.type}
               >
                 <option value="">Select</option>
-                <option value="sofa">Sofa</option>
-                <option value="bed">Bed</option>
-                <option value="table">Table</option>
-                <option value="chair">Chair</option>
+                <option value="Sofa">Sofa</option>
+                <option value="Bed">Bed</option>
+                <option value="Table">Table</option>
+                <option value="Chair">Chair</option>
               </select>
               <label>Product Description:</label>
               <span style={{ fontSize: "0.8em", color: "red", marginLeft: 20 }}>
@@ -159,6 +161,20 @@ const AddProduct = () => {
                 onChange={productForm.handleChange}
                 value={productForm.values.year}
               />
+              {sessionStorage.user &&
+              JSON.parse(sessionStorage.user)._id ===
+                process.env.REACT_APP_ADMIN ? (
+                <>
+                  <label>Price:</label>
+                  <input
+                    className="form-control"
+                    type="number"
+                    name="price"
+                    onChange={productForm.handleChange}
+                    value={productForm.values.price}
+                  />
+                </>
+              ) : null}
               <label>Upload Furniture Picture</label>
               <input
                 className="form-control"

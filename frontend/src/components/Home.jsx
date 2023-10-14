@@ -1,8 +1,9 @@
 import React from "react";
 import Footer from "./Footer";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="header vh-94">
@@ -74,7 +75,7 @@ const Home = () => {
                   src="https://wakefitdev.gumlet.io/img/npl_modified_images/BeD_RubberNew/bed_WSWB7860RIC/bed_WSWB7860RIC_1.jpg?w=732"
                   alt=""
                 />
-                <button className="btn btn-secondary mx-auto w-50 my-2">
+                <button className="btn btn-secondary mx-auto w-50 my-2" onClick={()=> navigate("/browse?selectedType=Bed")}>
                   Bed
                 </button>
                 
@@ -87,7 +88,7 @@ const Home = () => {
                   src="https://rukminim1.flixcart.com/image/300/300/xif0q/dining-chair/4/x/p/44-45-2-na-rosewood-sheesham-44-45-10-sdwr258-allie-wood-walnut-original-imagpn6n2uk7fxuk.jpeg"
                   alt=""
                 />
-                <button className="btn btn-secondary mx-auto w-50 my-2">
+                <button className="btn btn-secondary mx-auto w-50 my-2" onClick={()=> navigate("/browse?selectedType=Chair")}>
                   Chair
                 </button>
               </div>
@@ -99,7 +100,7 @@ const Home = () => {
                   src="https://www.at-home.co.in/cdn/shop/files/Rebecca3strLS.jpg?v=1686905820"
                   alt=""
                 />
-                <button className="btn btn-secondary mx-auto w-50 my-2">
+                <button className="btn btn-secondary mx-auto w-50 my-2" onClick={()=> navigate("/browse?selectedType=Sofa")}>
                   Sofa
                 </button>
               </div>
@@ -111,7 +112,7 @@ const Home = () => {
                   src="https://www.topfurniture.co.uk/media/catalog/product/cache/f9ee10735343e429049fcc2a9855e0f1/f/l/flipto211-lichfield-flip-top-square-extending-oak-dining-table-90cm-to-180cm-size-1.jpg"
                   alt=""
                 />
-                <button className="btn btn-secondary mx-auto w-50 my-2">
+                <button className="btn btn-secondary mx-auto w-50 my-2" onClick={()=> navigate("/browse?selectedType=Table")}>
                   Table
                 </button>
               </div>

@@ -8,27 +8,8 @@ const EditProduct = () => {
 
   const { id } = useParams();
 
-  const [selFile, setSelFile] = useState();
-
   const [furnitureData, setFurnitureData] = useState(null);
 
-  const uploadFile = async (e) => {
-    if (!e.target.files || e.target.files === "") return;
-
-    const file = e.target.files[0];
-    console.log(file.name);
-    setSelFile(file.name);
-
-    const fd = new FormData();
-    fd.append("myfile", file);
-
-    const res = await fetch("http://localhost:5000/util/uploadfile", {
-      method: "POST",
-      body: fd,
-    });
-
-    console.log("Status of upload: " + res.status);
-  };
 
   const fetchFurnitureData = async () => {
     const res = await fetch(`http://localhost:5000/product/getbyid/${id}`);
@@ -45,7 +26,6 @@ const EditProduct = () => {
   }, []);
 
   const submitForm = async (values, { setSubmitting }) => {
-    values.image = selFile;
     console.log(values);
     const res = await fetch(`http://localhost:5000/product/update/${id}`, {
       method: "PUT",
@@ -59,7 +39,7 @@ const EditProduct = () => {
 
     if (res.status === 200) {
       toast.success("Product Updated Successfully");
-      navigate("/myproducts");
+      navigate("/pricing");
     } else {
       toast.error("Something went wrong");
     }
@@ -72,7 +52,7 @@ const EditProduct = () => {
       (JSON.parse(sessionStorage.user)._id === furnitureData.user_id ||
         JSON.parse(sessionStorage.user)._id === process.env.REACT_APP_ADMIN) ? (
         <div className="container mx-auto row">
-          <h1>Edit Product</h1>
+          <h1>Edit Price</h1>
           <hr />
 
           <div className="card col-md-6 mx-auto shadow">
@@ -81,82 +61,7 @@ const EditProduct = () => {
                 <Formik initialValues={furnitureData} onSubmit={submitForm}>
                   {(productForm) => (
                     <form className="" onSubmit={productForm.handleSubmit}>
-                      <h3 className="text-center">Add Furniture</h3>
-                      <label>Product Name</label>
-                      <span
-                        style={{
-                          fontSize: "0.8em",
-                          color: "red",
-                          marginLeft: 20,
-                        }}
-                      >
-                        {productForm.touched.title && productForm.errors.title}
-                      </span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="title"
-                        onChange={productForm.handleChange}
-                        value={productForm.values.title}
-                      />
-                      <label>Type of Furniture:</label>
-                      <span
-                        style={{
-                          fontSize: "0.8em",
-                          color: "red",
-                          marginLeft: 20,
-                        }}
-                      >
-                        {productForm.touched.type && productForm.errors.type}
-                      </span>
-                      <select
-                        className="form-control"
-                        name="type"
-                        onChange={productForm.handleChange}
-                        value={productForm.values.type}
-                      >
-                        <option value="Sofa">Sofa</option>
-                        <option value="Bed">Bed</option>
-                        <option value="Table">Table</option>
-                        <option value="Chair">Chair</option>
-                      </select>
-                      <label>Product Description:</label>
-                      <span
-                        style={{
-                          fontSize: "0.8em",
-                          color: "red",
-                          marginLeft: 20,
-                        }}
-                      >
-                        {productForm.touched.description &&
-                          productForm.errors.description}
-                      </span>
-                      <textarea
-                        className="form-control"
-                        name="description"
-                        id="desc"
-                        cols="30"
-                        rows="5"
-                        onChange={productForm.handleChange}
-                        value={productForm.values.description}
-                      ></textarea>
-                      <label>Purchased in Year:</label>
-                      <span
-                        style={{
-                          fontSize: "0.8em",
-                          color: "red",
-                          marginLeft: 20,
-                        }}
-                      >
-                        {productForm.touched.year && productForm.errors.year}
-                      </span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="year"
-                        onChange={productForm.handleChange}
-                        value={productForm.values.year}
-                      />
+                      <h3 className="text-center">Add Price</h3>
                       {sessionStorage.user &&
                       JSON.parse(sessionStorage.user)._id ===
                         process.env.REACT_APP_ADMIN ? (
@@ -181,13 +86,6 @@ const EditProduct = () => {
                           />
                         </>
                       ) : null}
-                      <label>Upload Furniture Picture</label>
-                      <input
-                        className="form-control"
-                        name="image"
-                        type="file"
-                        onChange={uploadFile}
-                      />
                       <button
                         disabled={productForm.isSubmitting}
                         type="submit"
@@ -216,7 +114,7 @@ const EditProduct = () => {
         </div>
       ) : (
         <div className="container">
-          <h1>Edit Product</h1>
+          <h1>Edit Price</h1>
           <hr />
           <div className="card shadow">
             <div className="card-body">
