@@ -149,6 +149,18 @@ const AddProduct = () => {
                 rows="5"
                 onChange={productForm.handleChange}
                 value={productForm.values.description}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const currentValue = productForm.values.description || '';
+                    const cursorPosition = e.target.selectionStart;
+                    const newValue =
+                      currentValue.substring(0, cursorPosition) +
+                      '\n' +
+                      currentValue.substring(cursorPosition);
+                    productForm.setFieldValue('description', newValue);
+                  }
+                }}
               ></textarea>
               <label>Purchased in Year:</label>
               <span style={{ fontSize: "0.8em", color: "red", marginLeft: 20 }}>

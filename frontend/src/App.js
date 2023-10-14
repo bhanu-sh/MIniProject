@@ -24,9 +24,6 @@ import AdminAuth from "./components/AdminAuth";
 import EditAllProducts from "./components/EditAllProducts";
 
 function App() {
-  const userJSON = sessionStorage.user;
-  const user = userJSON ? JSON.parse(userJSON) : null;
-  const admin = process.env.REACT_APP_ADMIN;
 
   return (
     <div className="black">
@@ -36,20 +33,19 @@ function App() {
           <Navbar />
 
           <Routes>
+            //Normal Routes
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Browse />} path="/browse" />
             <Route element={<MyProducts />} path="/myproducts" />
-            <Route
-              element={
-                <UserAuth>
-                  <AddProduct />{" "}
-                </UserAuth>
-              }
-              path="/add"
-            />
-            
+            <Route element={<Product />} path="/product/:id" />
+            <Route element={<NotFound />} path="*" />
+            //User Auth Routes
+            <Route element={<UserAuth><AddProduct /></UserAuth>} path="/add" />
+            <Route element={<UserAuth><EditProduct /></UserAuth>} path="/editproduct/:id" />
+            <Route element={<UserAuth><Profile /></UserAuth>} path="/profile"/>
+            //Admin Auth Routes
             <Route element={<AdminAuth><ManageUser /></AdminAuth>} path="/manageuser" />
             <Route element={<AdminAuth><AllProducts /></AdminAuth>} path="/allproducts" />
             <Route element={<AdminAuth><Admin /></AdminAuth>} path="/webadmin" />
@@ -57,18 +53,8 @@ function App() {
             <Route element={<AdminAuth><SetPrice /></AdminAuth>} path="/setprice/:id" />
             <Route element={<AdminAuth><UpdateUser /></AdminAuth>} path="/updateuser/:id" />
             <Route element={<AdminAuth><EditAllProducts /></AdminAuth>} path="/manageproduct/:id" />
-            <Route element={<UserAuth><EditProduct /></UserAuth>} path="/editproduct/:id" />
-            <Route
-              element={
-                <UserAuth>
-                  <Profile />
-                </UserAuth>
-              }
-              path="/profile"
-            />
-            <Route element={<Product />} path="/product/:id" />
-            <Route element={<NotFound />} path="*" />
           </Routes>
+          
         </AppProvider>
       </BrowserRouter>
     </div>
