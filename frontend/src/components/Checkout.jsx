@@ -21,7 +21,13 @@ const Checkout = () => {
       state: Yup.string().required("State is Required"),
       city: Yup.string().required("City is Required"),
       pincode: Yup.number().required("Pincode is Required"),
+      phone: Yup.number()
+        .required("Phone is Required")
+        .min(10)
+        .integer()
+        .positive()
     }),
+    paymentMethod: Yup.string().required("Payment Method is Required"),
   });
 
   useEffect(() => {
@@ -50,24 +56,35 @@ const Checkout = () => {
     initialValues: {
       user_id: "",
       product_id: "",
+      seller_id: "",
+      seller_name: "",
       product_name: "",
       image: "",
       price: "",
       name: "",
+      date: "",
+      email: "",
       address: {
         line1: "",
         city: "",
         state: "",
         pincode: "",
+        phone: "",
       },
+      paymentMethod: "Cash on Delivery",
+      status: "Processing",
     },
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
       values.user_id = JSON.parse(sessionStorage.user)._id;
       values.product_id = furnitureData._id;
+      values.seller_id = furnitureData.user_id;
+      values.seller_name = furnitureData.user_name;
       values.product_name = furnitureData.title;
       values.image = furnitureData.image;
+      values.date = new Date().toLocaleDateString();
       values.price = furnitureData.price;
+      values.email = JSON.parse(sessionStorage.user).email;
       setTimeout(() => {
         console.log(values);
         setSubmitting(false);
@@ -256,7 +273,8 @@ const Checkout = () => {
                       marginLeft: 20,
                     }}
                   >
-                    {orderForm.errors.address && orderForm.errors.address.pincode}
+                    {orderForm.errors.address &&
+                      orderForm.errors.address.pincode}
                   </span>
                   <input
                     type="text"
@@ -266,8 +284,38 @@ const Checkout = () => {
                     value={orderForm.values.address.pincode}
                   />
                 </div>
+                <div className="col-md-4 mb-3">
+                  <label>Phone</label>
+                  <span
+                    style={{
+                      fontSize: "0.8em",
+                      color: "red",
+                      marginLeft: 20,
+                    }}
+                  >
+                    {orderForm.errors.address &&
+                      orderForm.errors.address.phone}
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="address.phone"
+                    onChange={orderForm.handleChange}
+                    value={orderForm.values.address.phone}
+                  />
+                </div>
               </div>
               <h4 className="mb-3">Payment</h4>
+              <span
+                style={{
+                  fontSize: "0.8em",
+                  color: "red",
+                  marginLeft: 20,
+                }}
+              >
+                {orderForm.errors.paymentMethod &&
+                  orderForm.errors.paymentMethod}
+              </span>
               <div className="d-block my-3">
                 <div className="custom-control custom-radio">
                   <input
@@ -278,7 +326,10 @@ const Checkout = () => {
                     defaultChecked=""
                     required=""
                   />
-                  <label className="custom-control-label" htmlFor="credit">
+                  <label
+                    className="custom-control-label"
+                    name="Cash on Delivery"
+                  >
                     Cash on Delivery
                   </label>
                 </div>

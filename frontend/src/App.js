@@ -23,6 +23,7 @@ import SetPrice from "./components/SetPrice";
 import AdminAuth from "./components/AdminAuth";
 import Checkout from "./components/Checkout";
 import MyOrders from "./components/MyOrders";
+import AllOrders from "./components/AllOrders";
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
             <Route element={<AdminAuth><Pricing /></AdminAuth>} path="/pricing" />
             <Route element={<AdminAuth><SetPrice /></AdminAuth>} path="/setprice/:id" />
             <Route element={<AdminAuth><UpdateUser /></AdminAuth>} path="/updateuser/:id" />
+            <Route element={<AdminAuth><AllOrders /></AdminAuth>} path="/allorders/" />
           </Routes>
 
         </AppProvider>
