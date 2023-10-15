@@ -1,25 +1,21 @@
-body {
+body{
   color: black;
-  background: radial-gradient(
-    circle at 18.7% 37.8%,
-    rgb(250, 250, 250) 0%,
-    rgb(225, 234, 238) 90%
-  );
+  background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
   background-repeat: no-repeat;
   min-height: 100vh;
 }
 
-.pfp {
+.pfp{
   border: 1px solid black;
   transition: 0.2s;
 }
 
-.pfp:hover {
+.pfp:hover{
   border: 1px solid red;
   transition: 0.2s;
 }
 
-.bg-black {
+.bg-black{
   background-color: black;
 }
 
@@ -42,12 +38,9 @@ li a {
   color: red !important;
 }
 
-.bg-filter {
-  background: linear-gradient(
-    to top,
-    #434343,
-    #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.bg-filter{
+background: linear-gradient(to top, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .navbar-brand {
@@ -62,7 +55,7 @@ li a {
   text-shadow: 2px 2px 5px black;
 }
 
-.min-card {
+.min-card{
   min-height: 100%;
 }
 
@@ -77,7 +70,7 @@ li a {
 }
 
 .tagline {
-  padding-bottom: 3vh;
+  padding-bottom: 10%;
 }
 
 .dark {
@@ -93,6 +86,10 @@ li a {
 
 .img-resize {
   height: 300px;
+}
+
+.vh-94 {
+  height: 94vh;
 }
 
 .header {
@@ -121,20 +118,20 @@ li a {
   width: 250px;
 }
 
-.pulldown {
+.pulldown{
   margin-top: 0;
   transition: 0.2s;
 }
 
-.pulldown:hover {
+.pulldown:hover{
   margin-top: 5px;
   transition: 0.2s;
 }
 
-.text-red {
+.text-red{
   color: red;
 }
 
-.navbar {
+.navbar{
   background-color: rgb(0, 0, 0);
 }

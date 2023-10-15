@@ -24,6 +24,8 @@ import AdminAuth from "./components/AdminAuth";
 import Checkout from "./components/Checkout";
 import MyOrders from "./components/MyOrders";
 import AllOrders from "./components/AllOrders";
+import UserAllOrders from "./components/UserAllOrders";
+import ManageOrder from "./components/ManageOrder";
 
 function App() {
 
@@ -50,6 +52,8 @@ function App() {
             <Route element={<UserAuth><Profile /></UserAuth>} path="/profile"/>
             <Route element={<UserAuth><Checkout /></UserAuth>} path="/checkout/:id" />
             <Route element={<UserAuth><MyOrders /></UserAuth>} path="/myorders/" />
+            <Route element={<UserAuth><UserAllOrders /></UserAuth>} path="/userorders/" />
+            <Route element={<UserAuth><ManageOrder /></UserAuth>} path="/manageorder/:id" />
             {/* Admin Auth Routes */}
             <Route element={<AdminAuth><ManageUser /></AdminAuth>} path="/manageuser" />
             <Route element={<AdminAuth><AllProducts /></AdminAuth>} path="/allproducts" />

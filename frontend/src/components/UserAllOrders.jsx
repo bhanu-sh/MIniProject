@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
-const AllOrders = () => {
-  // const navigate = useNavigate();
+import { useNavigate } from "react-router-dom";
+const UserAllOrders = () => {
+  const navigate = useNavigate();
   const [orderData, setOrderData] = useState([]);
+  const [noData, setNoData] = useState(false)
 
   const fetchOrderData = async () => {
     const res = await fetch("http://localhost:5000/order/getall");
@@ -54,12 +55,27 @@ const AllOrders = () => {
     fetchOrderData();
   }, []);
 
+  useEffect(() => {
+    // Check if there's no data and set the noData state accordingly
+    if (orderData.length === 0 || orderData.every(order => order.seller_id !== JSON.parse(sessionStorage.user)._id || order.status === "Cancelled")) {
+      setNoData(true);
+    } else {
+      setNoData(false);
+    }
+  }, [orderData]);
+
   return (
     <>
       <div className="container">
         <h1 className="text-center">Manage Orders</h1>
         <div className="row">
           {orderData.map((order) => {
+            if (
+              order.seller_id !== JSON.parse(sessionStorage.user)._id ||
+              order.status === "Cancelled"
+            ) {
+              return null;
+            }
             return (
               <>
                 <div className="card my-2">
@@ -106,6 +122,11 @@ const AllOrders = () => {
                               Status:{" "}
                               <span className="text-success">
                                 {order.status}
+                            <button className="mx-2 p-1 btn btn-dark"
+                              onClick={() => {navigate("/manageorder/" + order._id)}}
+                            >
+                              Update
+                            </button>
                               </span>
                             </p>
                           </div>
@@ -157,7 +178,7 @@ const AllOrders = () => {
           })}
         </div>
 
-        {orderData.length === 0 ? (
+        {(orderData.length === 0) || noData ? (
           <div className="container">
             <h1>Edit order</h1>
             <hr />
@@ -173,4 +194,4 @@ const AllOrders = () => {
   );
 };
 
-export default AllOrders;
+export default UserAllOrders
