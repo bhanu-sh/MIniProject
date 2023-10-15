@@ -94,12 +94,12 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/myproducts">
-                    My Furnitures
+                  <NavLink className="nav-link" to="/profile">
+                    Profile
                   </NavLink>
                 </li>
                 
-                {user && user._id === "65228b07a9c9f88468ea99a5" ? (
+                {user && user._id === process.env.REACT_APP_ADMIN ? (
                   <>
                     <li className="nav-item">
                       <NavLink className="nav-link" to="/webadmin">

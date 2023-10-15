@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const url = 'mongodb+srv://bhanu:1234@cluster0.qzxivp1.mongodb.net/mernaug630?retryWrites=true&w=majority';
+const url = 'mongodb+srv://'+ process.env.MONGOOSE_API +'?retryWrites=true&w=majority';
 
 //asynchronous - return Promise
 mongoose.connect(url)

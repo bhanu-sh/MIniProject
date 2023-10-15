@@ -93,7 +93,8 @@ const MyProducts = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center">Manage Products</h1>
+      <h1 className="mt-4">My Furnitures</h1>
+      <hr />
       <div className="row">
         {productData.map((furniture) => {
           if (furniture.user_id === JSON.parse(sessionStorage.user)._id) {

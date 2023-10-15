@@ -17,8 +17,7 @@ const MyOrders = () => {
       setOrderData(data);
       if (
         data.every(
-          (order) =>
-            order.user_id !== JSON.parse(sessionStorage.user)._id
+          (order) => order.user_id !== JSON.parse(sessionStorage.user)._id
         )
       ) {
         setNoOrdersAdded(true);
@@ -28,7 +27,12 @@ const MyOrders = () => {
     }
   };
 
-  const handleDeleteOrder = async (orderId) => {
+  const handleDeleteOrder = async (orderId, orderStatus) => {
+
+    if (orderStatus === "Cancelled" || orderStatus === "Delivered" || orderStatus === "Dispatched") {
+      toast.error("Order cannot be cancelled now.");
+      return;
+    }
     // Display a confirmation dialog
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this Order?"
@@ -68,7 +72,8 @@ const MyOrders = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center">Orders</h1>
+      <h1 className="mt-2">Orders</h1>
+      <hr />
       <div className="row">
         {orderData.map((order) => {
           if (order.user_id === JSON.parse(sessionStorage.user)._id) {
@@ -105,17 +110,13 @@ const MyOrders = () => {
                         <h6 className="text-danger">Price Not Specified Yet</h6>
                       )}
                       <p>
-                        Status: <span className="text-success">{order.status}</span>
+                        Status:{" "}
+                        <span className="text-success">{order.status}</span>
                       </p>
                       <div className="row">
                         <div className="col-md-6 my-2">
                           <button
-                            onClick={() =>
-                              handleDeleteOrder(
-                                order._id,
-                                order.image
-                              )
-                            }
+                            onClick={() => handleDeleteOrder(order._id, order.status)}
                             className="btn btn-danger shadow text-center w-100"
                           >
                             Cancel
@@ -133,8 +134,6 @@ const MyOrders = () => {
         })}
         {noOrdersAdded && (
           <div className="container">
-            <h1>Orders</h1>
-            <hr />
             <div className="card shadow">
               <div className="card-body">
                 <p>You have not added any product.</p>

@@ -50,16 +50,14 @@ const ManageOrder = () => {
       {orderData &&
       JSON.parse(sessionStorage.user)._id === orderData.seller_id ? (
         <div className="container mx-auto row">
-          <h1>Edit Status</h1>
-          <hr />
 
-          <div className="card col-md-6 mx-auto shadow">
+          <div className="card col-md-6 mx-auto shadow mt-5">
             <div className="card-body">
               {orderData !== null ? (
                 <Formik initialValues={orderData} onSubmit={submitForm}>
                   {(orderForm) => (
                     <form className="" onSubmit={orderForm.handleSubmit}>
-                      <h3 className="text-center">Add Price</h3>
+                      <h3 className="text-center">Manage Status</h3>
                       {sessionStorage.user &&
                       JSON.parse(sessionStorage.user)._id ===
                         orderData.seller_id ? (

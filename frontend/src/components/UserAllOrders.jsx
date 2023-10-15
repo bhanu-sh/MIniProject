@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 const UserAllOrders = () => {
   const navigate = useNavigate();
@@ -14,40 +13,6 @@ const UserAllOrders = () => {
       const data = await res.json();
       console.log(data);
       setOrderData(data);
-    }
-  };
-
-  const handleDeleteOrder = async (orderId) => {
-    // Display a confirmation dialog
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this order?"
-    );
-
-    if (confirmDelete) {
-      try {
-        const res = await fetch(
-          `http://localhost:5000/order/delete/${orderId}`,
-          {
-            method: "DELETE",
-          }
-        );
-
-        if (res.status === 200) {
-          // Delete was successful
-          // You may want to show a success message or update the order list
-          console.log("Order deleted successfully.");
-          toast.success("Order deleted successfully.");
-          // Refresh the order list after deletion
-          fetchOrderData();
-        } else {
-          // Handle errors, show an error message, or take appropriate action
-          console.log("Error deleting order.");
-          toast.error("Error deleting order.");
-        }
-      } catch (error) {
-        console.error("An error occurred:", error);
-        toast.error("An error occurred.");
-      }
     }
   };
 
@@ -122,11 +87,6 @@ const UserAllOrders = () => {
                               Status:{" "}
                               <span className="text-success">
                                 {order.status}
-                            <button className="mx-2 p-1 btn btn-dark"
-                              onClick={() => {navigate("/manageorder/" + order._id)}}
-                            >
-                              Update
-                            </button>
                               </span>
                             </p>
                           </div>
@@ -163,12 +123,11 @@ const UserAllOrders = () => {
                       </div>
 
                       <button
-                        onClick={() =>
-                          handleDeleteOrder(order._id, order.image)
+                        onClick={() => {navigate("/manageorder/" + order._id)}
                         }
-                        className="btn btn-danger shadow text-center w-50 mt-5"
+                        className="btn btn-dark shadow text-center w-25 mt-5"
                       >
-                        Cancel
+                        Update Status
                       </button>
                     </div>
                   </div>

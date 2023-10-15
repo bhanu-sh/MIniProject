@@ -1,4 +1,5 @@
 // import express
+require('dotenv').config();
 const express = require('express');
 
 const userRouter = require('./routers/userRouter');
