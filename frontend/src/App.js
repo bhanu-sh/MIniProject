@@ -22,6 +22,7 @@ import Pricing from "./components/Pricing";
 import SetPrice from "./components/SetPrice";
 import AdminAuth from "./components/AdminAuth";
 import Checkout from "./components/Checkout";
+import MyOrders from "./components/MyOrders";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Route element={<UserAuth><EditProduct /></UserAuth>} path="/editproduct/:id" />
             <Route element={<UserAuth><Profile /></UserAuth>} path="/profile"/>
             <Route element={<UserAuth><Checkout /></UserAuth>} path="/checkout/:id" />
+            <Route element={<UserAuth><MyOrders /></UserAuth>} path="/myorders/" />
             {/* Admin Auth Routes */}
             <Route element={<AdminAuth><ManageUser /></AdminAuth>} path="/manageuser" />
             <Route element={<AdminAuth><AllProducts /></AdminAuth>} path="/allproducts" />
