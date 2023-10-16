@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import NoAccess from './NoAccess';
+import NoAccessAdmin from './NoAccessAdmin';
 
 const AdminAuth = ({children}) => {
     const [currentUser] = useState(
@@ -9,7 +9,7 @@ const AdminAuth = ({children}) => {
     if(currentUser !== null && process.env.REACT_APP_ADMIN === currentUser){
         return children
     }else{
-        return <NoAccess />
+        return <NoAccessAdmin />
     }
 }
 

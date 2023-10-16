@@ -1,15 +1,26 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
+import { toast } from "react-hot-toast";
 
 const Checkout = () => {
   const { id } = useParams();
   const [furnitureData, setFurnitureData] = useState(null);
+  const [promoCode, setPromoCode] = useState(null);
+  const [promoCodeName, setPromoCodeName] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(null);
   const navigate = useNavigate();
   const currencyFormat = (num) => {
     return "₹ " + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
+
+  const PromoCodes = {
+    FLAT500: 500,
+    FLAT1000: 1000,
+    FLAT1500: 1500,
+    FLAT20000: 20000,
   };
 
   const OrderSchema = Yup.object().shape({
@@ -25,7 +36,7 @@ const Checkout = () => {
         .required("Phone is Required")
         .min(10)
         .integer()
-        .positive()
+        .positive(),
     }),
     paymentMethod: Yup.string().required("Payment Method is Required"),
   });
@@ -40,6 +51,7 @@ const Checkout = () => {
           const data = await response.json();
           setFurnitureData(data);
           console.log(data.name);
+          setTotalPrice(data.price);
         } else {
           navigate("/404");
         }
@@ -83,7 +95,7 @@ const Checkout = () => {
       values.product_name = furnitureData.title;
       values.image = furnitureData.image;
       values.date = new Date().toLocaleDateString();
-      values.price = furnitureData.price;
+      values.price = totalPrice;
       values.email = JSON.parse(sessionStorage.user).email;
       setTimeout(() => {
         console.log(values);
@@ -151,30 +163,75 @@ const Checkout = () => {
                   {currencyFormat(furnitureData.price)}
                 </span>
               </li>
-              {/* <li className="list-group-item d-flex justify-content-between bg-light">
-                <div className="text-success">
-                  <h6 className="my-0">Promo code</h6>
-                  <small>EXAMPLECODE</small>
+
+              {promoCode ? 
+              (
+                <div>
+                  <li className="list-group-item d-flex justify-content-between bg-light">
+                    <div className="text-success">
+                      <h6 className="my-0">Promo code</h6>
+                      <small>{promoCodeName}</small>
+                    </div>
+                    <span className="text-success">
+                      - {currencyFormat(promoCode)}
+                      <br />
+                      <Link to="" className="text-danger text-decoration-underline" onClick={
+                        ()=>{
+                          setPromoCode(null);
+                          setPromoCodeName(null);
+                          setTotalPrice(furnitureData.price);
+                          toast.error("Promo Code Removed");
+                        }
+                      }>Remove</Link>
+                    </span>
+                  </li>
                 </div>
-                <span className="text-success">-$5</span>
-              </li> */}
-              <li className="list-group-item d-flex justify-content-between">
-                <span>Total (INR)</span>
-                <strong>{currencyFormat(furnitureData.price)}</strong>
-              </li>
+              ) : null}
             </ul>
+            <li className="list-group-item d-flex justify-content-between">
+              <span>Total (INR)</span>
+              <strong>{currencyFormat(totalPrice)}</strong>
+            </li>
 
             <form className="card p-2">
               <div className="input-group">
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Promo code"
+                  name="promoCode" // Use name attribute to link it with Formik
+                  onChange={orderForm.handleChange}
+                  value={orderForm.values.promoCode} // Link the input field to Formik values
                 />
                 <div className="input-group-append">
-                  <button type="submit" className="btn btn-secondary">
+                  { !promoCodeName ?
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => {
+                      if (
+                        PromoCodes[orderForm.values.promoCode] &&
+                        PromoCodes[orderForm.values.promoCode] <=
+                          furnitureData.price
+                      ) {
+                        setPromoCode(PromoCodes[orderForm.values.promoCode]);
+                        setPromoCodeName(orderForm.values.promoCode);
+                        toast.success("Promo Code Applied");
+                        setTotalPrice(totalPrice - PromoCodes[orderForm.values.promoCode]);
+                      } else {
+                        toast.error("Invalid Promo Code");
+                      }
+                    }}
+                  >
                     Redeem
                   </button>
+
+                  : <button
+                  type="button"
+                  className="btn btn-secondary disabled"
+                >
+                  Redeem
+                </button> }
+                   
                 </div>
               </div>
             </form>
@@ -293,8 +350,7 @@ const Checkout = () => {
                       marginLeft: 20,
                     }}
                   >
-                    {orderForm.errors.address &&
-                      orderForm.errors.address.phone}
+                    {orderForm.errors.address && orderForm.errors.address.phone}
                   </span>
                   <input
                     type="text"

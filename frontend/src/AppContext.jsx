@@ -14,7 +14,7 @@ export const AppProvider = ({children}) => {
     const logout = () => {
         sessionStorage.removeItem('user');
         setLoggedin(false);
-        navigate('/login');
+        navigate('/');
     }
 
     const [loggedin, setLoggedin] = useState(currentUser!==null);

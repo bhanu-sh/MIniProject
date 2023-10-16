@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const NoAccess = () => {
+const NoAcessAdmin = () => {
     const navigate = useNavigate();
   return (
     <div className='container'>
@@ -19,4 +19,4 @@ const NoAccess = () => {
   )
 }
 
-export default NoAccess
+export default NoAcessAdmin

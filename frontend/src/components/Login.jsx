@@ -33,7 +33,7 @@ const Login = () => {
           title: "Login Successful",
         })
           .then((result) => {
-            navigate(-2);
+            navigate(-1);
           })
           .catch((err) => {
             console.log(err);

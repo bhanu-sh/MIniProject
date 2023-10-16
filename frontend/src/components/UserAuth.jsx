@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import NoAccessUser from './NoAccessUser';
 
 const UserAuth = ({children}) => {
     const [currentUser] = useState(
@@ -10,13 +9,7 @@ const UserAuth = ({children}) => {
     if(currentUser!==null){
         return children
     }else{
-        Swal.fire({
-            icon : 'warning',
-            title: 'Not Permitted!!',
-            text : 'Please Login to Continue'
-        });
-
-        return <Navigate to="/login" />
+        return <NoAccessUser />
     }
 }
 

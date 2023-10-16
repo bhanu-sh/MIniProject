@@ -102,13 +102,9 @@ const MyOrders = () => {
                       <p className="text-secondary">
                         Seller: {order.seller_name}
                       </p>
-                      {order.price ? (
                         <h6 className="text-success">
-                          Price: &#8377; {order.price}{" "}
+                          Amount: &#8377; {order.price}{" "}
                         </h6>
-                      ) : (
-                        <h6 className="text-danger">Price Not Specified Yet</h6>
-                      )}
                       <p>
                         Status:{" "}
                         <span className="text-success">{order.status}</span>
