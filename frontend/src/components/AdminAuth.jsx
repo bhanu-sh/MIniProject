@@ -3,10 +3,10 @@ import NoAccessAdmin from './NoAccessAdmin';
 
 const AdminAuth = ({children}) => {
     const [currentUser] = useState(
-        JSON.parse(sessionStorage.user)._id
+        JSON.parse(sessionStorage.user)
     );
 
-    if(currentUser !== null && process.env.REACT_APP_ADMIN === currentUser){
+    if(currentUser !== null && currentUser.isAdmin){
         return children
     }else{
         return <NoAccessAdmin />

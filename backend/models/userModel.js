@@ -5,7 +5,8 @@ const mySchema = new Schema({
     email : String,
     password : String,
     age : Number,
-    avatar: String 
+    avatar: String,
+    isAdmin: Boolean,
 });
 
 module.exports = model( 'user', mySchema );

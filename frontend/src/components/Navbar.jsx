@@ -24,7 +24,7 @@ const Navbar = () => {
               <Link to={"/profile"}>
                 {user.avatar ? <img src={"http://localhost:5000/" + user.avatar} width={50} 
                 className= "rounded-circle pfp"
-                alt="" /> : <img src="http://localhost:5000/defaultPfp.webp" alt="" width={50} />
+                alt="" /> : <img src="http://localhost:5000/defaultPfp.webp" className= "rounded-circle pfp" alt="" width={50} />
                 }
                 
               </Link>
@@ -81,11 +81,6 @@ const Navbar = () => {
                 Browse
               </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/manageuser">
-                Manage User
-              </NavLink>
-            </li> */}
             {loggedin ? (
               <>
                 <li className="nav-item">
@@ -93,13 +88,13 @@ const Navbar = () => {
                     Add Furniture
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item border-start border-secondary">
                   <NavLink className="nav-link" to="/profile">
                     Profile
                   </NavLink>
                 </li>
                 
-                {user && user._id === process.env.REACT_APP_ADMIN ? (
+                {user && user.isAdmin ? (
                   <>
                     <li className="nav-item">
                       <NavLink className="nav-link" to="/webadmin">

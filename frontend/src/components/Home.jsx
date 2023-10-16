@@ -19,7 +19,7 @@ const Home = () => {
               {/* <h6>Discover unique pieces to transform your space or sell your furniture with ease. Embrace sustainable living and shop smart at ReFurnished today.</h6> */}
             </div>
 
-            <div className="row gx-5">
+            <div className="row gx-5 text-center">
               <div className="col-md-4 py-2">
                 <div className="card dark p-3 tagline min-card">
                   <img

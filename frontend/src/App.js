@@ -26,6 +26,7 @@ import MyOrders from "./components/MyOrders";
 import AllOrders from "./components/AllOrders";
 import UserAllOrders from "./components/UserAllOrders";
 import ManageOrder from "./components/ManageOrder";
+import AdminSignup from "./components/AdminSignup";
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
+            <Route element={<AdminSignup />} path="/adminsignup" />
             <Route element={<Browse />} path="/browse" />
             <Route element={<Product />} path="/product/:id" />
             <Route element={<NotFound />} path="*" />

@@ -10,12 +10,16 @@ const SignupSchema = Yup.object().shape({
     .min(4, "Min. 4 characters req.")
     .required("Name is Required"),
   email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  admincode: Yup.string().required("Admin Code Required"),
 });
 
-const Signup = () => {
+const AdminSignup = () => {
   const navigate = useNavigate();
 
-  const [selFile, setSelFile] = useState('');
+  const [selFile, setSelFile] = useState("");
 
   // initialize the formik
   const signupForm = useFormik({
@@ -23,45 +27,59 @@ const Signup = () => {
       name: "",
       email: "",
       password: "",
+      avatar: "",
+      isAdmin: false,
     },
     onSubmit: async (values, { setSubmitting }) => {
       values.avatar = selFile;
-      setSubmitting(true);
+      if (values.admincode === process.env.REACT_APP_ADMIN_CODE) {
+        values.isAdmin = true;
+        setSubmitting(true);
 
-      setTimeout(() => {
-        console.log(values);
-        setSubmitting(false);
-      }, 3000);
-
-      // send the data to the server
-
-      const res = await fetch("http://localhost:5000/user/add", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log(res.status);
-
-      if (res.status === 200) {
-        Swal.fire({
-          icon: "success",
-          title: "Nice",
-          text: "You have signed up successfully",
-        })
-          .then((result) => {
-            navigate("/login");
+        setTimeout(() => {
+          console.log(values);
+          setSubmitting(false);
+        }, 3000);
+  
+        // send the data to the server
+  
+        const res = await fetch("http://localhost:5000/user/add", {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        console.log(res.status);
+  
+        if (res.status === 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Nice",
+            text: "You have signed up successfully",
           })
-          .catch((err) => {
-            console.log(err);
+            .then((result) => {
+              navigate("/login");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops!!",
+            text: "Something went wrong",
           });
+        }
+        
       } else {
         Swal.fire({
           icon: "error",
           title: "Oops!!",
-          text: "Something went wrong",
+          text: "Admin Code is wrong",
+        }).then((result) => {
+          navigate("/adminsignup");
         });
       }
     },
@@ -69,23 +87,22 @@ const Signup = () => {
   });
 
   const uploadFile = async (e) => {
-    if(!e.target.files) return;
+    if (!e.target.files) return;
 
     const file = e.target.files[0];
     console.log(file.name);
     setSelFile(file.name);
 
     const fd = new FormData();
-    fd.append('myfile', file);
+    fd.append("myfile", file);
 
-    const res = await fetch('http://localhost:5000/util/uploadfile', {
-      method: 'POST',
-      body: fd
+    const res = await fetch("http://localhost:5000/util/uploadfile", {
+      method: "POST",
+      body: fd,
     });
 
     console.log(res.status);
-
-  }
+  };
 
   return (
     <div>
@@ -95,19 +112,36 @@ const Signup = () => {
             <form onSubmit={signupForm.handleSubmit}>
               <h3 className="text-center">Signup Form</h3>
               <div className="row text-center mb-4">
-                <Link to={"/signup"} className="text-decoration-none col-md-6 border-bottom border-primary border-4 text-primary">
+                <Link to={"/signup"} className="text-decoration-none col-md-6 text-black">
                   <div><h5>User</h5></div>
                 </Link>
-                <Link to={"/adminsignup"} className="text-decoration-none col-md-6 text-black">
+                <Link to={"/adminsignup"} className="text-decoration-none col-md-6 border-bottom border-danger border-4 text-danger">
                   <div><h5>Admin</h5></div>
                 </Link>
               </div>
-              <label>Name</label>
 
+              <label>Admin Code</label>
+              <span
+                style={{
+                  fontSize: "0.8em",
+                  color: "red",
+                  marginLeft: 20,
+                }}
+              >
+                {signupForm.touched.admincode && signupForm.errors.admincode}
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                name="admincode"
+                onChange={signupForm.handleChange}
+                value={signupForm.values.admincode}
+              />
+
+              <label>Name</label>
               <span style={{ fontSize: "0.8em", color: "red", marginLeft: 20 }}>
                 {signupForm.touched.name && signupForm.errors.name}
               </span>
-
               <input
                 type="text"
                 className="form-control mb-4"
@@ -140,12 +174,16 @@ const Signup = () => {
               />
 
               <label>Upload Profile Picture</label>
-              <input className="form-control mb-4" type="file" onChange={uploadFile} />
+              <input
+                className="form-control mb-4"
+                type="file"
+                onChange={uploadFile}
+              />
 
               <button
                 disabled={signupForm.isSubmitting}
                 type="submit"
-                className="btn btn-primary mt-5 w-100"
+                className="btn btn-danger mt-5 w-100"
               >
                 {signupForm.isSubmitting ? (
                   <>
@@ -167,4 +205,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default AdminSignup;
