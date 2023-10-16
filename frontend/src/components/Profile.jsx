@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
@@ -15,7 +16,7 @@ const Profile = () => {
   const [userEmail, setUserEmail] = useState(
     JSON.parse(sessionStorage.user).email
   );
-  const [userAvatar, setUserAvatar] = useState(
+  const [userAvatar] = useState(
     JSON.parse(sessionStorage.user).avatar
   );
   const [userData, setUserData] = useState(null);
@@ -59,6 +60,7 @@ const Profile = () => {
     fetchUserData();
     fetchProductData();
     fetchOrderData();
+    // eslint-disable-next-line
   }, []);
 
   const submitForm = async (values, { setSubmitting }) => {

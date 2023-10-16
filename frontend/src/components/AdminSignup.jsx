@@ -32,7 +32,7 @@ const AdminSignup = () => {
     },
     onSubmit: async (values, { setSubmitting }) => {
       values.avatar = selFile;
-      if (JSON.parse(sessionStorage.user).isAdmin) {
+      if (values.admincode === process.env.REACT_APP_ADMIN_CODE) {
         values.isAdmin = true;
         setSubmitting(true);
 
