@@ -12,7 +12,7 @@ const EditProduct = () => {
 
 
   const fetchFurnitureData = async () => {
-    const res = await fetch(`http://localhost:5000/product/getbyid/${id}`);
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`);
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -27,7 +27,8 @@ const EditProduct = () => {
 
   const submitForm = async (values, { setSubmitting }) => {
     console.log(values);
-    const res = await fetch(`http://localhost:5000/product/update/${id}`, {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + 
+      `/product/update/${id}`, {
       method: "PUT",
       body: JSON.stringify(values),
       headers: {
@@ -50,7 +51,7 @@ const EditProduct = () => {
     <div>
       {furnitureData &&
       (JSON.parse(sessionStorage.user)._id === furnitureData.user_id ||
-        JSON.parse(sessionStorage.user)._id === process.env.REACT_APP_ADMIN) ? (
+        JSON.parse(sessionStorage.user).isAdmin) ? (
         <div className="container mx-auto row">
           <h1>Edit Price</h1>
           <hr />
@@ -63,8 +64,7 @@ const EditProduct = () => {
                     <form className="" onSubmit={productForm.handleSubmit}>
                       <h3 className="text-center">Add Price</h3>
                       {sessionStorage.user &&
-                      JSON.parse(sessionStorage.user)._id ===
-                        process.env.REACT_APP_ADMIN ? (
+                      JSON.parse(sessionStorage.user).isAdmin ? (
                         <>
                           <label>Price:</label>
                           <span

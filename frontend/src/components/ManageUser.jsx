@@ -5,7 +5,7 @@ const ManageUser = () => {
   const [userData, setUserData] = useState([]);
 
   const fetchUserData = async () => {
-    const res = await fetch("http://localhost:5000/user/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getall");
     console.log(res.status);
 
     if (res.status === 200) {
@@ -22,7 +22,7 @@ const ManageUser = () => {
 
     if (confirmDelete) {
       try {
-        const res = await fetch(`http://localhost:5000/user/delete/${userId}`, {
+        const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/user/delete/${userId}`, {
           method: "DELETE",
         });
 

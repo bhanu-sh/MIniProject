@@ -32,7 +32,7 @@ const AdminSignup = () => {
     },
     onSubmit: async (values, { setSubmitting }) => {
       values.avatar = selFile;
-      if (values.admincode === process.env.REACT_APP_ADMIN_CODE) {
+      if (JSON.parse(sessionStorage.user).isAdmin) {
         values.isAdmin = true;
         setSubmitting(true);
 
@@ -43,7 +43,7 @@ const AdminSignup = () => {
   
         // send the data to the server
   
-        const res = await fetch("http://localhost:5000/user/add", {
+        const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/add", {
           method: "POST",
           body: JSON.stringify(values),
           headers: {
@@ -96,7 +96,7 @@ const AdminSignup = () => {
     const fd = new FormData();
     fd.append("myfile", file);
 
-    const res = await fetch("http://localhost:5000/util/uploadfile", {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/util/uploadfile", {
       method: "POST",
       body: fd,
     });

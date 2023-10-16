@@ -8,7 +8,7 @@ const MyOrders = () => {
   const [noOrdersAdded, setNoOrdersAdded] = useState(false);
 
   const fetchOrderData = async () => {
-    const res = await fetch("http://localhost:5000/order/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/order/getall");
     console.log(res.status);
 
     if (res.status === 200) {
@@ -41,7 +41,7 @@ const MyOrders = () => {
     if (confirmDelete) {
       try {
         const res = await fetch(
-          `http://localhost:5000/order/delete/${orderId}`,
+          process.env.REACT_APP_BACKEND_URL + `/order/delete/${orderId}`,
           {
             method: "DELETE",
           }
@@ -84,7 +84,7 @@ const MyOrders = () => {
                     {order.image ? (
                       <img
                         className="card img-resize img-fluid"
-                        src={"http://localhost:5000/" + order.image}
+                        src={process.env.REACT_APP_BACKEND_URL + "/" + order.image}
                         alt=""
                       />
                     ) : (

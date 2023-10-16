@@ -25,7 +25,7 @@ const Profile = () => {
   const [toggleEdit, setToggleEdit] = useState(false);
 
   const fetchUserData = async () => {
-    const res = await fetch(`http://localhost:5000/user/getbyid/${id}`);
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/user/getbyid/${id}`);
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -34,7 +34,7 @@ const Profile = () => {
   };
 
   const fetchProductData = async () => {
-    const res = await fetch("http://localhost:5000/product/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
     console.log(res.status);
 
     if (res.status === 200) {
@@ -45,7 +45,7 @@ const Profile = () => {
   };
 
   const fetchOrderData = async () => {
-    const res = await fetch(`http://localhost:5000/order/getall`);
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/getall`);
     if (res.status === 200) {
       const data = await res.json();
       const userOrders = data.filter((order) => order.user_id === id);
@@ -64,7 +64,7 @@ const Profile = () => {
   const submitForm = async (values, { setSubmitting }) => {
     console.log(values);
 
-    const res = await fetch(`http://localhost:5000/user/update/${id}`, {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/user/update/${id}`, {
       method: "PUT",
       body: JSON.stringify(values),
       headers: {
@@ -93,7 +93,7 @@ const Profile = () => {
           <div className="row">
             <div className="col-md-2 ms-2 my-2 text-center">
               <img
-                src={"http://localhost:5000/" + userAvatar}
+                src={process.env.REACT_APP_BACKEND_URL + "/" + userAvatar}
                 width={120}
                 height={120}
                 className="rounded-circle shadow"

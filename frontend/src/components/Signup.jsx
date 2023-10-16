@@ -35,7 +35,7 @@ const Signup = () => {
 
       // send the data to the server
 
-      const res = await fetch("http://localhost:5000/user/add", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/add", {
         method: "POST",
         body: JSON.stringify(values),
         headers: {
@@ -78,7 +78,7 @@ const Signup = () => {
     const fd = new FormData();
     fd.append('myfile', file);
 
-    const res = await fetch('http://localhost:5000/util/uploadfile', {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/util/uploadfile', {
       method: 'POST',
       body: fd
     });

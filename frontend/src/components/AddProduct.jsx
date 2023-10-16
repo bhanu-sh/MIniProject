@@ -51,7 +51,7 @@ const AddProduct = () => {
 
       // send the data to the server
 
-      const res = await fetch("http://localhost:5000/product/add", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/add", {
         method: "POST",
         body: JSON.stringify(values),
         headers: {
@@ -94,7 +94,7 @@ const AddProduct = () => {
     const fd = new FormData();
     fd.append("myfile", file);
 
-    const res = await fetch("http://localhost:5000/util/uploadfile", {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/util/uploadfile", {
       method: "POST",
       body: fd,
     });
@@ -173,9 +173,8 @@ const AddProduct = () => {
                 onChange={productForm.handleChange}
                 value={productForm.values.year}
               />
-              {sessionStorage.user &&
-              JSON.parse(sessionStorage.user)._id ===
-                process.env.REACT_APP_ADMIN ? (
+              {sessionStorage.user &&  JSON.parse(sessionStorage.user).isAdmin
+               ? (
                 <>
                   <label>Price:</label>
                   <input

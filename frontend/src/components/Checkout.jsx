@@ -45,7 +45,7 @@ const Checkout = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/product/getbyid/${id}`
+          process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -104,7 +104,7 @@ const Checkout = () => {
 
       // send the data to the server
 
-      const res = await fetch("http://localhost:5000/order/add", {
+      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/order/add", {
         method: "POST",
         body: JSON.stringify(values),
         headers: {

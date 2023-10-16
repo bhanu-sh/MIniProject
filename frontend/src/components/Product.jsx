@@ -13,7 +13,7 @@ const Product = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/product/getbyid/${id}`
+          process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -41,7 +41,7 @@ const Product = () => {
         <div className="col-md-4">
           <img
             className="card img-fluid shadow"
-            src={"http://localhost:5000/" + furnitureData.image}
+            src={process.env.REACT_APP_BACKEND_URL + "/" + furnitureData.image}
             alt=""
           />
         </div>

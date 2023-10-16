@@ -11,7 +11,7 @@ const ManageOrder = () => {
   const [orderData, setOrderData] = useState(null);
 
   const fetchOrderData = async () => {
-    const res = await fetch(`http://localhost:5000/order/getbyid/${id}`);
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/getbyid/${id}`);
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -26,7 +26,7 @@ const ManageOrder = () => {
 
   const submitForm = async (values, { setSubmitting }) => {
     console.log(values);
-    const res = await fetch(`http://localhost:5000/order/update/${id}`, {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/update/${id}`, {
       method: "PUT",
       body: JSON.stringify(values),
       headers: {

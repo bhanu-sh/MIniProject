@@ -31,7 +31,6 @@ import AdminSignup from "./components/AdminSignup";
 function App() {
 
   return (
-    console.log(process.env.REACT_APP_ADMIN),
     <div className="black">
       <Toaster position="bottom-center" reverseOrder={false} />
       <BrowserRouter>

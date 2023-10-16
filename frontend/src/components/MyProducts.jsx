@@ -8,7 +8,7 @@ const MyProducts = () => {
   const [noProductsAdded, setNoProductsAdded] = useState(false);
 
   const fetchProductData = async () => {
-    const res = await fetch("http://localhost:5000/product/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
     console.log(res.status);
 
     if (res.status === 200) {
@@ -32,7 +32,7 @@ const MyProducts = () => {
     if (confirmDelete) {
       try {
         const res = await fetch(
-          `http://localhost:5000/product/delete/${productId}`,
+          process.env.REACT_APP_BACKEND_URL + `/product/delete/${productId}`,
           {
             method: "DELETE",
           }
@@ -57,7 +57,7 @@ const MyProducts = () => {
       if (productImage) {
         try {
           const res = await fetch(
-            `http://localhost:5000/util/deletefile/${productImage}`,
+            process.env.REACT_APP_BACKEND_URL + `/util/deletefile/${productImage}`,
             {
               method: "DELETE",
             }
@@ -105,7 +105,7 @@ const MyProducts = () => {
                     {furniture.image ? (
                       <img
                         className="card img-resize img-fluid"
-                        src={"http://localhost:5000/" + furniture.image}
+                        src={process.env.REACT_APP_BACKEND_URL + "/" + furniture.image}
                         alt=""
                       />
                     ) : (

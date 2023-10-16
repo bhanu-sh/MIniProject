@@ -7,7 +7,7 @@ const Pricing = () => {
   const [productData, setProductData] = useState([]);
 
   const fetchProductData = async () => {
-    const res = await fetch("http://localhost:5000/product/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
     console.log(res.status);
 
     if (res.status === 200) {
@@ -52,7 +52,7 @@ const Pricing = () => {
                     {furniture.image ? (
                       <img
                         className="card img-resize img-fluid"
-                        src={"http://localhost:5000/" + furniture.image}
+                        src={process.env.REACT_APP_BACKEND_URL + "/" + furniture.image}
                         alt=""
                       />
                     ) : (

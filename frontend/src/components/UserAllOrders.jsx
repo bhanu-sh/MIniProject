@@ -6,7 +6,7 @@ const UserAllOrders = () => {
   const [noData, setNoData] = useState(false)
 
   const fetchOrderData = async () => {
-    const res = await fetch("http://localhost:5000/order/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/order/getall");
     console.log(res.status);
 
     if (res.status === 200) {
@@ -49,7 +49,7 @@ const UserAllOrders = () => {
                       {order.image ? (
                         <img
                           className="card mx-auto img-resize img-fluid"
-                          src={"http://localhost:5000/" + order.image}
+                          src={process.env.REACT_APP_BACKEND_URL + "/" + order.image}
                           alt=""
                         />
                       ) : (
@@ -70,15 +70,9 @@ const UserAllOrders = () => {
                             <p className="text-secondary">
                               Seller: {order.seller_name}
                             </p>
-                            {order.price ? (
                               <h6 className="text-success">
-                                Price: &#8377; {order.price}{" "}
+                                Amount: &#8377; {order.price}{" "}
                               </h6>
-                            ) : (
-                              <h6 className="text-danger">
-                                Price Not Specified Yet
-                              </h6>
-                            )}
                             <p>
                               Order Date:{" "}
                               <span className="text-success">{order.date}</span>

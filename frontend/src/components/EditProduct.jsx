@@ -22,7 +22,7 @@ const EditProduct = () => {
     const fd = new FormData();
     fd.append("myfile", file);
 
-    const res = await fetch("http://localhost:5000/util/uploadfile", {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/util/uploadfile", {
       method: "POST",
       body: fd,
     });
@@ -31,7 +31,7 @@ const EditProduct = () => {
   };
 
   const fetchFurnitureData = async () => {
-    const res = await fetch(`http://localhost:5000/product/getbyid/${id}`);
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`);
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -47,7 +47,7 @@ const EditProduct = () => {
   const submitForm = async (values, { setSubmitting }) => {
     values.image = selFile;
     console.log(values);
-    const res = await fetch(`http://localhost:5000/product/update/${id}`, {
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/product/update/${id}`, {
       method: "PUT",
       body: JSON.stringify(values),
       headers: {
@@ -70,7 +70,7 @@ const EditProduct = () => {
     <div>
       {furnitureData &&
       (JSON.parse(sessionStorage.user)._id === furnitureData.user_id ||
-        JSON.parse(sessionStorage.user)._id === process.env.REACT_APP_ADMIN) ? (
+        JSON.parse(sessionStorage.user).isAdmin) ? (
         <div className="container mx-auto row">
           <h1>Edit Product</h1>
           <hr />
@@ -147,8 +147,7 @@ const EditProduct = () => {
                       value={productForm.values.year}
                     />
                     {sessionStorage.user &&
-                    JSON.parse(sessionStorage.user)._id ===
-                      process.env.REACT_APP_ADMIN ? (
+                    JSON.parse(sessionStorage.user).isAdmin ? (
                       <>
                         <label>Price:</label>
                         <input

@@ -22,9 +22,9 @@ const Navbar = () => {
             </li>
             <li className="nav-item col">
               <Link to={"/profile"}>
-                {user.avatar ? <img src={"http://localhost:5000/" + user.avatar} width={50} 
+                {user.avatar ? <img src={process.env.REACT_APP_BACKEND_URL + "/" + user.avatar} width={50} 
                 className= "rounded-circle pfp"
-                alt="" /> : <img src="http://localhost:5000/defaultPfp.webp" className= "rounded-circle pfp" alt="" width={50} />
+                alt="" /> : <img src={process.env.REACT_APP_BACKEND_URL + "/defaultPfp.webp"} className= "rounded-circle pfp" alt="" width={50} />
                 }
                 
               </Link>
@@ -83,12 +83,12 @@ const Navbar = () => {
             </li>
             {loggedin ? (
               <>
-                <li className="nav-item">
+                <li className="nav-item border-start border-secondary">
                   <NavLink className="nav-link" to="/add">
                     Add Furniture
                   </NavLink>
                 </li>
-                <li className="nav-item border-start border-secondary">
+                <li className="nav-item">
                   <NavLink className="nav-link" to="/profile">
                     Profile
                   </NavLink>

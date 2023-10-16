@@ -9,7 +9,7 @@ const Admin = () => {
   const [withoutPriceCount, setWithoutPriceCount] = useState(0);
 
   const fetchProductData = async () => {
-    const res = await fetch("http://localhost:5000/product/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
     console.log(res.status);
   
     if (res.status === 200) {
@@ -23,7 +23,7 @@ const Admin = () => {
   };
 
   const fetchUserData = async () => {
-    const res = await fetch(`http://localhost:5000/user/getall`);
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/user/getall`);
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -31,7 +31,7 @@ const Admin = () => {
     }
   };
   const fetchOrderData = async () => {
-    const res = await fetch(`http://localhost:5000/order/getall`);
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/getall`);
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
