@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, json, useNavigate } from "react-router-dom";
+import UseAppContext from "../AppContext";
 
 const ManageUser = () => {
   const [userData, setUserData] = useState([]);
+  const { loggedin, logout } = UseAppContext();
+
+  const navigate = useNavigate();
 
   const fetchUserData = async () => {
     const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/getall");
@@ -15,25 +20,58 @@ const ManageUser = () => {
     }
   };
 
-  const handleDeleteUser = async (userId) => {
+  const handleDeleteUser = async (userId, userAvatar) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this User?"
     );
 
     if (confirmDelete) {
       try {
-        const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/user/delete/${userId}`, {
-          method: "DELETE",
-        });
-
+        const res = await fetch(
+          process.env.REACT_APP_BACKEND_URL + `/user/delete/${userId}`,
+          {
+            method: "DELETE",
+          }
+        );
         if (res.status === 200) {
           console.log("User deleted successfully.");
+          toast.success("User deleted successfully.");
+          if (userAvatar) {
+            try {
+              const res = await fetch(
+                process.env.REACT_APP_BACKEND_URL +
+                  `/util/deletefile/${userAvatar}`,
+                {
+                  method: "DELETE",
+                }
+              );
+              if (res.status === 200) {
+                console.log("User's Avatar deleted successfully.");
+                toast.success("User's Avatar deleted successfully.");
+              } else {
+                console.log("Error deleting User's Avatar.");
+                toast.error("Error deleting User's Avatar.");
+              }
+            } catch (error) {
+              console.error("An error occurred in image deletion:", error);
+              toast.error("An error occurred in image deletion.");
+            }
+          } else {
+            console.log("No image found");
+            toast.error("No image found");
+          }
           fetchUserData();
         } else {
           console.log("Error deleting User.");
+          toast.error("Error deleting User.");
         }
       } catch (error) {
         console.error("An error occurred:", error);
+        toast.error("An error occurred.");
+      }
+      if (userId === JSON.parse(sessionStorage.user)._id) {
+        logout();
+        navigate("/");
       }
     }
   };
@@ -67,7 +105,7 @@ const ManageUser = () => {
                   <td>
                     <button
                       className="btn btn-danger w-75"
-                      onClick={() => handleDeleteUser(user._id)}
+                      onClick={() => handleDeleteUser(user._id, user.avatar)}
                     >
                       Delete
                     </button>
