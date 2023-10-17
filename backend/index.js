@@ -12,10 +12,6 @@ const cors = require("cors");
 const app = express();
 const port = 5000;
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
-
 // middlewares
 app.use(express.json());
 app.use(
@@ -46,14 +42,6 @@ app.get("/add", (req, res) => {
 
 app.get("/getall", (req, res) => {
   res.send("response from getall");
-});
-
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "dist/index.html"), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
 });
 
 // starting the server
