@@ -8,6 +8,7 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [Contact](#contact)
 
 ## Features
 
@@ -34,7 +35,7 @@ Before diving into ReFurnished, ensure you've got the following prerequisites in
 
 2. Navigate to the server directory:
   ```
-      cd backend
+  cd backend
   ```
 
 3. Install server dependencies:
