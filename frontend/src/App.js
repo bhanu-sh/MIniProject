@@ -27,6 +27,8 @@ import AllOrders from "./components/AllOrders";
 import UserAllOrders from "./components/UserAllOrders";
 import ManageOrder from "./components/ManageOrder";
 import AdminSignup from "./components/AdminSignup";
+import About from './components/About';
+import Contact from "./components/Contact";
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
             <Route element={<AdminSignup />} path="/adminsignup" />
             <Route element={<Browse />} path="/browse" />
             <Route element={<Product />} path="/product/:id" />
+            <Route element={<About />} path="/about" />
+            <Route element={<Contact />} path="/contact" />
             <Route element={<NotFound />} path="*" />
             {/* User Auth Routes */}
             <Route element={<UserAuth><AddProduct /></UserAuth>} path="/add" />

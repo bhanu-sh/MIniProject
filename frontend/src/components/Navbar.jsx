@@ -81,9 +81,19 @@ const Navbar = () => {
                 Browse
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/about">
+                About Us
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/contact">
+                Contact Us
+              </NavLink>
+            </li>
             {loggedin ? (
               <>
-                <li className="nav-item border-start border-secondary">
+                <li className="nav-item border-start border-dark border-3">
                   <NavLink className="nav-link" to="/add">
                     Add Furniture
                   </NavLink>
@@ -96,7 +106,7 @@ const Navbar = () => {
                 
                 {user && user.isAdmin ? (
                   <>
-                    <li className="nav-item">
+                    <li className="nav-item border-start border-3 border-dark">
                       <NavLink className="nav-link" to="/webadmin">
                         Admin
                       </NavLink>

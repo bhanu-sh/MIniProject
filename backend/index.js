@@ -12,6 +12,10 @@ const cors = require("cors");
 const app = express();
 const port = 5000;
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
+
 // middlewares
 app.use(express.json());
 app.use(
