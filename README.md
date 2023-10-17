@@ -1,23 +1,20 @@
 # ReFurnished - A MERN Stack Web Application
 
 ## Description
-**ReFurnished** is a dynamic web application that breathes new life into the world of [describe the main purpose or unique features of your app]. Built using the powerful MERN (MongoDB, Express.js, React, Node.js) stack, this application offers a seamless experience for [describe your target audience].
+**ReFurnished** is a dynamic web application that breathes new life into the world of Furniture market, makes it easy for any user to list their items and even buy other's items. Built using the powerful MERN (MongoDB, Express.js, React, Node.js) stack, this application offers a seamless experience for browsing through and buying the furnitures you would love to have.
 
 ## Table of Contents
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
-- :rocket **Feature 1**: [Describe one of your standout features]
-- :computer **Feature 2**: [Highlight another key functionality]
-- :clipboard **Feature 3**: [Mention a third important feature]
-- [List any other significant features your app offers]
+- **User Friendly**: It can be operated by almost anyone with little computer knowledge.
+- **Device Friendly**: It is responsive, meaning it can be opened in any device without breaking the layout.
+- **Inspected Before Listing**: Products only listed after reviewed by the admin.
+- **Easy to setup**: Very easy to setup and deploy the app
 
 ## Getting Started
 
@@ -25,59 +22,58 @@
 
 Before diving into ReFurnished, ensure you've got the following prerequisites in place:
 
-- :gear **Node.js & NPM**: Make sure you have Node.js and NPM installed on your system.
-- :floppy_disk **MongoDB**: Set up a MongoDB database and note your connection string.
+- **Node.js & NPM**: Make sure you have Node.js and NPM installed on your system.
+- **MongoDB**: Set up a MongoDB database and note your connection string.
 
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/ReFurnished.git
-Navigate to the server directory:
+   ```
+   git clone https://github.com/bhanu-sh/MIniProject.git
+   ```
 
-bash
-Copy code
-cd ReFurnished/server
-Install server dependencies:
+2. Navigate to the server directory:
+```
+cd backend
+```
 
-bash
-Copy code
+3. Install server dependencies:
+```
 npm install
-Navigate to the client directory:
+```
 
-bash
-Copy code
-cd ../client
-Install client dependencies:
+4. Navigate to the client directory:
+```
+cd ../frontend
+```
 
-bash
-Copy code
+5. Install client dependencies:
+```
 npm install
-Return to the root directory:
+```
 
-bash
-Copy code
+6. Return to the root directory:
+```
 cd ..
-Create a .env file in the server directory with the required environment variables (e.g., MongoDB connection string, secret key).
+```
 
-Start the server and client:
+7. Create a .env file in the backend directory with the required environment variables (MONGOOSE_API).
+8. Create a .env file in the frontend directory with the required environment variables (REACT_APP_ADMIN_CODE, REACT_APP_BACKEND_URL).
 
-bash
-Copy code
+9. Start the server:
+```
+cd backend
 npm run dev
+```
+
+10. Start the client:
+```
+cd frontend
+npm start
+```
+_________________________________________________________________________________________________________________
+
 Your app should now be running locally. By default, the client runs on port 3000, and the server on port 5000.
 
-Usage
-[Provide instructions and examples on how to use your web app. Include any important details about its functionality, user roles, and usage scenarios.]
-
-Contributing
-[Explain how others can contribute to your project. Include information about issues, pull requests, and any coding standards or guidelines you'd like contributors to follow.]
-
-License
-This project is licensed under the [License Name] License - see the LICENSE file for details.
-
-Acknowledgements
-[List any libraries, frameworks, or resources that you used or were inspired by in your project.]
-
-Contact
-[Provide contact information in case users or contributors want to reach out with questions or feedback. You can include your email, GitHub profile, or other preferred means of contact.]
+### Contact
+bhanuelicit@gmail.com
