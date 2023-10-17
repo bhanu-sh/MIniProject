@@ -33,44 +33,44 @@ Before diving into ReFurnished, ensure you've got the following prerequisites in
    ```
 
 2. Navigate to the server directory:
-```
-cd backend
-```
+  ```
+  cd backend
+  ```
 
 3. Install server dependencies:
-```
-npm install
-```
+  ```
+  npm install
+  ```
 
 4. Navigate to the client directory:
-```
-cd ../frontend
-```
+  ```
+  cd ../frontend
+  ```
 
 5. Install client dependencies:
-```
-npm install
-```
+  ```
+  npm install
+  ```
 
 6. Return to the root directory:
-```
-cd ..
-```
+  ```
+  cd ..
+  ```
 
 7. Create a .env file in the backend directory with the required environment variables (MONGOOSE_API).
 8. Create a .env file in the frontend directory with the required environment variables (REACT_APP_ADMIN_CODE, REACT_APP_BACKEND_URL).
 
 9. Start the server:
-```
-cd backend
-npm run dev
-```
+  ```
+  cd backend
+  npm run dev
+  ```
 
 10. Start the client:
-```
-cd frontend
-npm start
-```
+  ```
+  cd frontend
+  npm start
+  ```
 _________________________________________________________________________________________________________________
 
 Your app should now be running locally. By default, the client runs on port 3000, and the server on port 5000.
