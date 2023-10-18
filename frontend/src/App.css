@@ -108,6 +108,14 @@ background: linear-gradient(to top, #434343, #000000);
   font-weight: 400;
 }
 
+.furniture-card-browse {
+  transform: scale(1);
+}
+
+.furniture-card-browse:hover {
+  transform: scale(1.02);
+  transition: 0.1s;
+}
 
 .img-250 {
   height: 250px;

@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Zoom from "react-reveal/Zoom";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -27,37 +28,43 @@ const Home = () => {
 
             <div className="row gx-5 text-center">
               <div className="col-md-4 py-2">
-                <div className="card dark p-3 tagline min-card">
-                  <img
-                    className="img-fluid rounded m-auto d-block"
-                    src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
-                    width={50}
-                    alt=""
-                  />
-                  <h4 className="pb-2">Get Best Prices.</h4>
-                </div>
+                <Zoom>
+                  <div className="card dark p-3 tagline min-card">
+                    <img
+                      className="img-fluid rounded m-auto d-block"
+                      src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
+                      width={50}
+                      alt=""
+                    />
+                    <h4 className="pb-2">Get Best Prices.</h4>
+                  </div>
+                </Zoom>
               </div>
               <div className="col-md-4 py-2">
-                <div className="card dark p-3 tagline min-card">
-                  <img
-                    className="img-fluid rounded m-auto d-block"
-                    src="https://cdn-icons-png.flaticon.com/512/1198/1198368.png"
-                    width={50}
-                    alt=""
-                  />
-                  <h4 className="">Get Quality Furnitures.</h4>
-                </div>
+                <Zoom>
+                  <div className="card dark p-3 tagline min-card">
+                    <img
+                      className="img-fluid rounded m-auto d-block"
+                      src="https://cdn-icons-png.flaticon.com/512/1198/1198368.png"
+                      width={50}
+                      alt=""
+                    />
+                    <h4 className="">Get Quality Furnitures.</h4>
+                  </div>
+                </Zoom>
               </div>
               <div className="col-md-4 py-2">
-                <div className="card dark p-3 tagline min-card">
-                  <img
-                    className="img-fluid rounded m-auto d-block"
-                    src="https://cdn-icons-png.flaticon.com/512/5530/5530525.png"
-                    width={50}
-                    alt=""
-                  />
-                  <h4 className="pb-2">Inspected before listing.</h4>
-                </div>
+                <Zoom>
+                  <div className="card dark p-3 tagline min-card">
+                    <img
+                      className="img-fluid rounded m-auto d-block"
+                      src="https://cdn-icons-png.flaticon.com/512/5530/5530525.png"
+                      width={50}
+                      alt=""
+                    />
+                    <h4 className="pb-2">Inspected before listing.</h4>
+                  </div>
+                </Zoom>
               </div>
             </div>
 
@@ -80,21 +87,24 @@ const Home = () => {
           <h1 className="pb-3">Furnitures:</h1>
           <div className="row gx-5">
             <div className="col-md-3 py-2">
-              <div className="card">
-                <img
-                  className="card img-resize img-fluid"
-                  src="https://wakefitdev.gumlet.io/img/npl_modified_images/BeD_RubberNew/bed_WSWB7860RIC/bed_WSWB7860RIC_1.jpg?w=732"
-                  alt=""
-                />
-                <button
-                  className="btn btn-secondary mx-auto w-50 my-2"
-                  onClick={() => navigate("/browse?selectedType=Bed")}
-                >
-                  Bed
-                </button>
-              </div>
+              <Zoom>
+                <div className="card">
+                  <img
+                    className="card img-resize img-fluid"
+                    src="https://wakefitdev.gumlet.io/img/npl_modified_images/BeD_RubberNew/bed_WSWB7860RIC/bed_WSWB7860RIC_1.jpg?w=732"
+                    alt=""
+                  />
+                  <button
+                    className="btn btn-secondary mx-auto w-50 my-2"
+                    onClick={() => navigate("/browse?selectedType=Bed")}
+                  >
+                    Bed
+                  </button>
+                </div>
+              </Zoom>
             </div>
             <div className="col-md-3 col-xs-6 py-2">
+            <Zoom>
               <div className="card">
                 <img
                   className="card img-resize img-fluid"
@@ -108,8 +118,10 @@ const Home = () => {
                   Chair
                 </button>
               </div>
+              </Zoom>
             </div>
             <div className="col-md-3 col-xs-6 py-2">
+            <Zoom>
               <div className="card">
                 <img
                   className="card img-resize img-fluid"
@@ -123,8 +135,10 @@ const Home = () => {
                   Sofa
                 </button>
               </div>
+              </Zoom>
             </div>
             <div className="col-md-3 col-xs-6 py-2">
+            <Zoom>
               <div className="card">
                 <img
                   className="card img-resize img-fluid"
@@ -138,6 +152,7 @@ const Home = () => {
                   Table
                 </button>
               </div>
+              </Zoom>
             </div>
           </div>
           <div className="text-center">

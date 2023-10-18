@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 
 const AllProducts = () => {
   const navigate = useNavigate();
@@ -87,16 +88,21 @@ const AllProducts = () => {
     <motion.div
       className="container"
       style={{ height: "100vh" }}
-      initial={{ opacity: 0}}
-      animate={{ opacity: 1}}
-      exit={{ opacity: 0}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
       <h1 className="text-center">Manage Products</h1>
       <div className="row">
         {productData.map((furniture) => {
           return (
-            <>
-              <div className="col-md-3 py-2 furniture-card">
+            <div className="col-md-3 py-2 furniture-card">
+              <Tilt
+                glareEnable={false}
+                tiltMaxAngleX={5}
+                tiltMaxAngleY={5}
+                tiltReverse={true}
+              >
                 <div className="card shadow">
                   {furniture.image ? (
                     <img
@@ -153,8 +159,8 @@ const AllProducts = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </>
+              </Tilt>
+            </div>
           );
         })}
       </div>
