@@ -10,6 +10,20 @@
   - [Installation](#installation)
 - [Contact](#contact)
 
+## Screenshots
+Home Screen:
+![Home Screen](https://github.com/bhanu-sh/MIniProject/blob/master/screenshots/home.png)
+
+Browse:
+![Browse](https://github.com/bhanu-sh/MIniProject/blob/master/screenshots/browse.png)
+
+Profile Page:
+![Profile Page](https://github.com/bhanu-sh/MIniProject/blob/master/screenshots/profile.png)
+
+
+Admin Page:
+![Admin Page](https://github.com/bhanu-sh/MIniProject/blob/master/screenshots/admin.png)
+
 ## Features
 
 - **User Friendly**: It can be operated by almost anyone with little computer knowledge.
