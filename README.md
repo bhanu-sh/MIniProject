@@ -4,6 +4,7 @@
 **ReFurnished** is a dynamic web application that breathes new life into the world of Furniture market, makes it easy for any user to list their items and even buy other's items. Built using the powerful MERN (MongoDB, Express.js, React, Node.js) stack, this application offers a seamless experience for browsing through and buying the furnitures you would love to have.
 
 ## Table of Contents
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
