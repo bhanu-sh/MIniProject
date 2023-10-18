@@ -26,6 +26,7 @@ const Browse = () => {
     if (res.status === 200) {
       const data = await res.json();
       setFurnitureData(data);
+      console.log(data);
     }
   };
 

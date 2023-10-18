@@ -76,9 +76,4 @@ router.delete("/delete/:id", (req, res) => {
     });
 });
 
-//getall
-//getbyemail
-//getbyid
-//update
-
 module.exports = router;

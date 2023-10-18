@@ -87,9 +87,4 @@ router.post('/authenticate', (req, res) => {
     });
 })
 
-//getall
-//getbyemail
-//getbyid
-//update
-
 module.exports = router;

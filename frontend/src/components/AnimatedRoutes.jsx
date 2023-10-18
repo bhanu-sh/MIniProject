@@ -26,6 +26,7 @@ import Admin from "./Admin";
 import Checkout from "./Checkout";
 import { AnimatePresence } from "framer-motion";
 import EditProduct from "./EditProduct";
+import Messages from "./Messages";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -162,7 +163,15 @@ const AnimatedRoutes = () => {
               <AllOrders />
             </AdminAuth>
           }
-          path="/allorders/"
+          path="/allorders"
+        />
+        <Route
+          element={
+            <AdminAuth>
+              <Messages />
+            </AdminAuth>
+          }
+          path="/messages"
         />
       </Routes>
     </AnimatePresence>

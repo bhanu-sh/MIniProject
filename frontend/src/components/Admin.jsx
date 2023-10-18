@@ -8,6 +8,7 @@ const Admin = () => {
   const [userData, setUserData] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [withoutPriceCount, setWithoutPriceCount] = useState(0);
+  const [messageCount, setMessageCount] = useState(0);
 
   const fetchProductData = async () => {
     const res = await fetch(
@@ -24,6 +25,17 @@ const Admin = () => {
         (product) => !product.price
       ).length;
       setWithoutPriceCount(unpricedProductsCount);
+    }
+  };
+
+  const fetchMessageData = async () => {
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/message/getall"
+    );
+    if (res.status === 200) {
+      const data = await res.json();
+      console.log(data);
+      setMessageCount(data.length);
     }
   };
 
@@ -50,6 +62,7 @@ const Admin = () => {
     fetchProductData();
     fetchUserData();
     fetchOrderData();
+    fetchMessageData();
   }, []);
 
   return (
@@ -108,6 +121,22 @@ const Admin = () => {
                 onClick={() => navigate("/pricing")}
               >
                 Manage Price
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4 mt-4">
+          <div className="card text-center">
+            <div className="card-body">
+              <h1>Messages</h1>
+              <hr />
+              <h2>{messageCount}</h2>
+              <hr />
+              <button
+                className="btn btn-warning"
+                onClick={() => navigate("/messages")}
+              >
+                View Messages
               </button>
             </div>
           </div>

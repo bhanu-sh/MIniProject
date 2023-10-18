@@ -5,6 +5,7 @@ const express = require("express");
 const userRouter = require("./routers/userRouter");
 const productRouter = require("./routers/productRouter");
 const orderRouter = require("./routers/orderRouter");
+const messageRouter = require("./routers/messageRouter");
 const utilRouter = require("./routers/utils");
 const cors = require("cors");
 
@@ -23,6 +24,7 @@ app.use(
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/order", orderRouter);
+app.use("/message", messageRouter);
 app.use("/util", utilRouter);
 
 app.use(express.static("./uploads"));
