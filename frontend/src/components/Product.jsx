@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Product = () => {
   const { id } = useParams();
@@ -36,7 +37,13 @@ const Product = () => {
   }
 
   return (
-    <div className="container vh-100 p-0 mt-5">
+    <motion.div
+      className="container vh-100 p-0 mt-5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <div className="row">
         <div className="col-md-4">
           <img
@@ -76,7 +83,7 @@ const Product = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

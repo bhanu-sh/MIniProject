@@ -3,6 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 const SignupSchema = Yup.object().shape({
@@ -15,7 +16,7 @@ const SignupSchema = Yup.object().shape({
 const Signup = () => {
   const navigate = useNavigate();
 
-  const [selFile, setSelFile] = useState('');
+  const [selFile, setSelFile] = useState("");
 
   // initialize the formik
   const signupForm = useFormik({
@@ -69,37 +70,54 @@ const Signup = () => {
   });
 
   const uploadFile = async (e) => {
-    if(!e.target.files) return;
+    if (!e.target.files) return;
 
     const file = e.target.files[0];
     console.log(file.name);
     setSelFile(file.name);
 
     const fd = new FormData();
-    fd.append('myfile', file);
+    fd.append("myfile", file);
 
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/util/uploadfile', {
-      method: 'POST',
-      body: fd
-    });
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/util/uploadfile",
+      {
+        method: "POST",
+        body: fd,
+      }
+    );
 
     console.log(res.status);
-
-  }
+  };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <div className="col-md-4 mx-auto mt-5">
         <div className="card shadow">
           <div className="card-body ">
             <form onSubmit={signupForm.handleSubmit}>
               <h3 className="text-center">Signup Form</h3>
               <div className="row text-center mb-4">
-                <Link to={"/signup"} className="text-decoration-none col-md-6 border-bottom border-primary border-4 text-primary">
-                  <div><h5>User</h5></div>
+                <Link
+                  to={"/signup"}
+                  className="text-decoration-none col-md-6 border-bottom border-primary border-4 text-primary"
+                >
+                  <div>
+                    <h5>User</h5>
+                  </div>
                 </Link>
-                <Link to={"/adminsignup"} className="text-decoration-none col-md-6 text-black">
-                  <div><h5>Admin</h5></div>
+                <Link
+                  to={"/adminsignup"}
+                  className="text-decoration-none col-md-6 text-black"
+                >
+                  <div>
+                    <h5>Admin</h5>
+                  </div>
                 </Link>
               </div>
               <label>Name</label>
@@ -140,7 +158,11 @@ const Signup = () => {
               />
 
               <label>Upload Profile Picture</label>
-              <input className="form-control mb-4" type="file" onChange={uploadFile} />
+              <input
+                className="form-control mb-4"
+                type="file"
+                onChange={uploadFile}
+              />
 
               <button
                 disabled={signupForm.isSubmitting}
@@ -163,7 +185,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

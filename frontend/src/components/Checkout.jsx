@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -104,13 +105,16 @@ const Checkout = () => {
 
       // send the data to the server
 
-      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/order/add", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/order/add",
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log(res.status);
 
       if (res.status === 200) {
@@ -141,7 +145,13 @@ const Checkout = () => {
   }
   return (
     <>
-      <div className="container">
+      <motion.div
+        className="container"
+        initial={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 0 }}
+        style={{ height: "100vh" }}
+      >
         <div className="py-5 text-center">
           <h2>Checkout form</h2>
         </div>
@@ -164,8 +174,7 @@ const Checkout = () => {
                 </span>
               </li>
 
-              {promoCode ? 
-              (
+              {promoCode ? (
                 <div>
                   <li className="list-group-item d-flex justify-content-between bg-light">
                     <div className="text-success">
@@ -175,14 +184,18 @@ const Checkout = () => {
                     <span className="text-success">
                       - {currencyFormat(promoCode)}
                       <br />
-                      <Link to="" className="text-danger text-decoration-underline" onClick={
-                        ()=>{
+                      <Link
+                        to=""
+                        className="text-danger text-decoration-underline"
+                        onClick={() => {
                           setPromoCode(null);
                           setPromoCodeName(null);
                           setTotalPrice(furnitureData.price);
                           toast.error("Promo Code Removed");
-                        }
-                      }>Remove</Link>
+                        }}
+                      >
+                        Remove
+                      </Link>
                     </span>
                   </li>
                 </div>
@@ -203,35 +216,37 @@ const Checkout = () => {
                   value={orderForm.values.promoCode} // Link the input field to Formik values
                 />
                 <div className="input-group-append">
-                  { !promoCodeName ?
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => {
-                      if (
-                        PromoCodes[orderForm.values.promoCode] &&
-                        PromoCodes[orderForm.values.promoCode] <=
-                          furnitureData.price
-                      ) {
-                        setPromoCode(PromoCodes[orderForm.values.promoCode]);
-                        setPromoCodeName(orderForm.values.promoCode);
-                        toast.success("Promo Code Applied");
-                        setTotalPrice(totalPrice - PromoCodes[orderForm.values.promoCode]);
-                      } else {
-                        toast.error("Invalid Promo Code");
-                      }
-                    }}
-                  >
-                    Redeem
-                  </button>
-
-                  : <button
-                  type="button"
-                  className="btn btn-secondary disabled"
-                >
-                  Redeem
-                </button> }
-                   
+                  {!promoCodeName ? (
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => {
+                        if (
+                          PromoCodes[orderForm.values.promoCode] &&
+                          PromoCodes[orderForm.values.promoCode] <=
+                            furnitureData.price
+                        ) {
+                          setPromoCode(PromoCodes[orderForm.values.promoCode]);
+                          setPromoCodeName(orderForm.values.promoCode);
+                          toast.success("Promo Code Applied");
+                          setTotalPrice(
+                            totalPrice - PromoCodes[orderForm.values.promoCode]
+                          );
+                        } else {
+                          toast.error("Invalid Promo Code");
+                        }
+                      }}
+                    >
+                      Redeem
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-secondary disabled"
+                    >
+                      Redeem
+                    </button>
+                  )}
                 </div>
               </div>
             </form>
@@ -411,7 +426,7 @@ const Checkout = () => {
             </form>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const MyProducts = () => {
   const navigate = useNavigate();
@@ -8,14 +9,21 @@ const MyProducts = () => {
   const [noProductsAdded, setNoProductsAdded] = useState(false);
 
   const fetchProductData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/product/getall"
+    );
     console.log(res.status);
 
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
       setProductData(data);
-      if (data.every((furniture) => furniture.user_id !== JSON.parse(sessionStorage.user)._id)) {
+      if (
+        data.every(
+          (furniture) =>
+            furniture.user_id !== JSON.parse(sessionStorage.user)._id
+        )
+      ) {
         setNoProductsAdded(true);
       } else {
         setNoProductsAdded(false);
@@ -57,7 +65,8 @@ const MyProducts = () => {
       if (productImage) {
         try {
           const res = await fetch(
-            process.env.REACT_APP_BACKEND_URL + `/util/deletefile/${productImage}`,
+            process.env.REACT_APP_BACKEND_URL +
+              `/util/deletefile/${productImage}`,
             {
               method: "DELETE",
             }
@@ -79,8 +88,7 @@ const MyProducts = () => {
           console.error("An error occurred in image deletion:", error);
           toast.error("An error occurred in image deletion.");
         }
-      }
-      else{
+      } else {
         console.log("No image found");
         toast.error("No image found");
       }
@@ -92,7 +100,13 @@ const MyProducts = () => {
   }, []);
 
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <h1 className="mt-4">My Furnitures</h1>
       <hr />
       <div className="row">
@@ -105,7 +119,11 @@ const MyProducts = () => {
                     {furniture.image ? (
                       <img
                         className="card img-resize img-fluid"
-                        src={process.env.REACT_APP_BACKEND_URL + "/" + furniture.image}
+                        src={
+                          process.env.REACT_APP_BACKEND_URL +
+                          "/" +
+                          furniture.image
+                        }
                         alt=""
                       />
                     ) : (
@@ -122,9 +140,13 @@ const MyProducts = () => {
                       <h4>{furniture.title}</h4>
                       <h6>Type: {furniture.type}</h6>
                       <h6>Year: {furniture.year}</h6>
-                      <p className="text-secondary">Seller: {furniture.user_name}</p>
+                      <p className="text-secondary">
+                        Seller: {furniture.user_name}
+                      </p>
                       {furniture.price ? (
-                        <h5 className="text-success">Price: &#8377; {furniture.price} </h5>
+                        <h5 className="text-success">
+                          Price: &#8377; {furniture.price}{" "}
+                        </h5>
                       ) : (
                         <h6 className="text-danger">Price Not Specified Yet</h6>
                       )}
@@ -138,7 +160,12 @@ const MyProducts = () => {
                         </div>
                         <div className="col-md-6 my-2">
                           <button
-                            onClick={() => handleDeleteProduct(furniture._id, furniture.image)}
+                            onClick={() =>
+                              handleDeleteProduct(
+                                furniture._id,
+                                furniture.image
+                              )
+                            }
                             className="btn btn-danger shadow text-center w-100"
                           >
                             Delete
@@ -155,24 +182,24 @@ const MyProducts = () => {
           }
         })}
         {noProductsAdded && (
-        <div className="container">
-          <h1>Edit Product</h1>
-          <hr />
-          <div className="card shadow">
-            <div className="card-body">
-              <p>You have not added any product.</p>
-              <button
-                className="btn btn-primary"
-                onClick={() => navigate("/add")}
-              >
-                Add Products
-              </button>
+          <div className="container">
+            <h1>Edit Product</h1>
+            <hr />
+            <div className="card shadow">
+              <div className="card-body">
+                <p>You have not added any product.</p>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate("/add")}
+                >
+                  Add Products
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

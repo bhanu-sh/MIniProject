@@ -2,6 +2,7 @@ import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ManageOrder = () => {
   const navigate = useNavigate();
@@ -11,7 +12,9 @@ const ManageOrder = () => {
   const [orderData, setOrderData] = useState(null);
 
   const fetchOrderData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/getbyid/${id}`);
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/order/getbyid/${id}`
+    );
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -26,13 +29,16 @@ const ManageOrder = () => {
 
   const submitForm = async (values, { setSubmitting }) => {
     console.log(values);
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/update/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(values),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/order/update/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     console.log("Status of update: " + res.status);
 
@@ -46,11 +52,15 @@ const ManageOrder = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       {orderData &&
       JSON.parse(sessionStorage.user)._id === orderData.seller_id ? (
         <div className="container mx-auto row">
-
           <div className="card col-md-6 mx-auto shadow mt-5">
             <div className="card-body">
               {orderData !== null ? (
@@ -120,7 +130,7 @@ const ManageOrder = () => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

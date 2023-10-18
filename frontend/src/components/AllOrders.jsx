@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const AllOrders = () => {
   // const navigate = useNavigate();
@@ -56,7 +57,13 @@ const AllOrders = () => {
 
   return (
     <>
-      <div className="container">
+      <motion.div
+        className="container"
+        style={{ height: "100vh" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
         <h1 className="text-center">Manage Orders</h1>
         <div className="row">
           {orderData.map((order) => {
@@ -68,7 +75,11 @@ const AllOrders = () => {
                       {order.image ? (
                         <img
                           className="card mx-auto img-resize img-fluid"
-                          src={process.env.REACT_APP_BACKEND_URL + "/" + order.image}
+                          src={
+                            process.env.REACT_APP_BACKEND_URL +
+                            "/" +
+                            order.image
+                          }
                           alt=""
                         />
                       ) : (
@@ -168,7 +179,7 @@ const AllOrders = () => {
             </div>
           </div>
         ) : null}
-      </div>
+      </motion.div>
     </>
   );
 };

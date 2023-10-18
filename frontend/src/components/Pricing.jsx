@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const Pricing = () => {
   const navigate = useNavigate();
   const [productData, setProductData] = useState([]);
 
   const fetchProductData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/product/getall"
+    );
     console.log(res.status);
 
     if (res.status === 200) {
@@ -21,27 +24,35 @@ const Pricing = () => {
     fetchProductData();
   }, []);
 
-  if (productData.every(furniture => furniture.price)) {
+  if (productData.every((furniture) => furniture.price)) {
     return (
       <div className="container mt-5">
-          <div className="card shadow">
-            <div className="card-body">
-              <p>No Product Pending..</p>
-              <button
-                className="btn btn-primary"
-                onClick={() => navigate("/webadmin")}
-              >
-                Admin Dashboard
-              </button>
-            </div>
+        <div className="card shadow">
+          <div className="card-body">
+            <p>No Product Pending..</p>
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate("/webadmin")}
+            >
+              Admin Dashboard
+            </button>
           </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container">
-      <h1 className="text-center text-decoration-underline">Products Without Price</h1>
+    <motion.div
+      className="container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
+      <h1 className="text-center text-decoration-underline">
+        Products Without Price
+      </h1>
       <div className="row">
         {productData.map((furniture) => {
           if (!furniture.price) {
@@ -52,7 +63,11 @@ const Pricing = () => {
                     {furniture.image ? (
                       <img
                         className="card img-resize img-fluid"
-                        src={process.env.REACT_APP_BACKEND_URL + "/" + furniture.image}
+                        src={
+                          process.env.REACT_APP_BACKEND_URL +
+                          "/" +
+                          furniture.image
+                        }
                         alt=""
                       />
                     ) : (
@@ -75,8 +90,10 @@ const Pricing = () => {
                         <h6 className="text-danger">Price Not Specified Yet</h6>
                       )}
                       <div className="text-center my-2">
-
-                        <button className="btn btn-warning shadow text-center 2 w-100" onClick={() => navigate("/setprice/" + furniture._id)}>
+                        <button
+                          className="btn btn-warning shadow text-center 2 w-100"
+                          onClick={() => navigate("/setprice/" + furniture._id)}
+                        >
                           Edit Price
                         </button>
                       </div>
@@ -106,7 +123,7 @@ const Pricing = () => {
           </div>
         </div>
       ) : null}
-    </div>
+    </motion.div>
   );
 };
 

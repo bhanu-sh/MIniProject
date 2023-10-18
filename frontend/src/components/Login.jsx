@@ -3,6 +3,7 @@ import React from "react";
 import Swal from "sweetalert2";
 import UseAppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,14 +17,16 @@ const Login = () => {
     },
 
     onSubmit: async (values) => {
-
-      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/authenticate", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/user/authenticate",
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log(res.status);
 
@@ -61,7 +64,12 @@ const Login = () => {
   });
 
   return !sessionStorage.user ? (
-    <div className="py-5">
+    <motion.div
+      className="py-5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className="col-md-3 mx-auto">
         <div className="card shadow">
           <div className="card-body">
@@ -92,9 +100,15 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   ) : (
-    <div className="py-5">
+    <motion.div
+      className="py-5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <div className="col-md-3 mx-auto">
         <div className="card shadow">
           <div className="card-body">
@@ -102,7 +116,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default Login;

@@ -1,11 +1,17 @@
 import React from "react";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <div className="header vh-94">
         <div className="main vh-94">
           <div className="container">
@@ -147,7 +153,7 @@ const Home = () => {
 
         <Footer />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

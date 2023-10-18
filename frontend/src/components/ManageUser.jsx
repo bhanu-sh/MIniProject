@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, json, useNavigate } from "react-router-dom";
 import UseAppContext from "../AppContext";
+import { motion } from "framer-motion";
 
 const ManageUser = () => {
   const [userData, setUserData] = useState([]);
@@ -81,7 +82,13 @@ const ManageUser = () => {
   }, []);
 
   return (
-    <div className="container py-5">
+    <motion.div
+      className="container py-5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <h1 className="text-center">Manage Users</h1>
       <div className="table-responsive">
         <table className="table table-dark">
@@ -124,7 +131,7 @@ const ManageUser = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

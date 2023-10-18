@@ -49,7 +49,12 @@ const Footer = () => {
           <Link className="text-white" to="/">
             ReFurnished
           </Link>
-          <span className="mx-2 px-2 border-secondary border-start">Made by: <Link className="text-white" to="https://github.com/bhanu-sh">Bhanu</Link></span>
+          <span className="mx-2 px-2 border-secondary border-start">
+            Made by:{" "}
+            <Link className="text-white" to="https://github.com/bhanu-sh">
+              Bhanu
+            </Link>
+          </span>
         </div>
       </footer>
     </div>

@@ -2,9 +2,9 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import UseAppContext from "../AppContext";
 import "../App.css";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
-
   const userJSON = sessionStorage.user;
   const user = userJSON ? JSON.parse(userJSON) : null;
 
@@ -22,13 +22,22 @@ const Navbar = () => {
             </li>
             <li className="nav-item col">
               <Link to={"/profile"}>
-                {user.avatar ? <img src={process.env.REACT_APP_BACKEND_URL + "/" + user.avatar} width={50} 
-                className= "rounded-circle pfp"
-                alt="" /> : <img src={process.env.REACT_APP_BACKEND_URL + "/defaultPfp.webp"} className= "rounded-circle pfp" alt="" width={50} />
-                }
-                
+                {user.avatar ? (
+                  <img
+                    src={process.env.REACT_APP_BACKEND_URL + "/" + user.avatar}
+                    width={50}
+                    className="rounded-circle pfp"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src={process.env.REACT_APP_BACKEND_URL + "/defaultPfp.webp"}
+                    className="rounded-circle pfp"
+                    alt=""
+                    width={50}
+                  />
+                )}
               </Link>
-              
             </li>
           </div>
         </>
@@ -53,7 +62,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg text-white nav-height">
+    <motion.nav
+      className="navbar navbar-expand-lg text-white nav-height"     
+    >
       <div className="container-fluid">
         <Link className="navbar-brand " to="/">
           ReFurnished
@@ -103,7 +114,7 @@ const Navbar = () => {
                     Profile
                   </NavLink>
                 </li>
-                
+
                 {user && user.isAdmin ? (
                   <>
                     <li className="nav-item border-start border-3 border-dark">
@@ -122,9 +133,8 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
 export default Navbar;
-

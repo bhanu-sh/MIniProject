@@ -2,6 +2,7 @@ import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -10,9 +11,10 @@ const EditProduct = () => {
 
   const [furnitureData, setFurnitureData] = useState(null);
 
-
   const fetchFurnitureData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`);
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`
+    );
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -27,14 +29,16 @@ const EditProduct = () => {
 
   const submitForm = async (values, { setSubmitting }) => {
     console.log(values);
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + 
-      `/product/update/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(values),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/product/update/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     console.log("Status of update: " + res.status);
 
@@ -48,7 +52,12 @@ const EditProduct = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       {furnitureData &&
       (JSON.parse(sessionStorage.user)._id === furnitureData.user_id ||
         JSON.parse(sessionStorage.user).isAdmin) ? (
@@ -129,7 +138,7 @@ const EditProduct = () => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

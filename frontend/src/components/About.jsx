@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const About = () => {
   return (
-    <div className="container mt-4">
+    <motion.div
+      className="container mt-4"
+      style={{ height: "100vh" }}
+      initial={{ opacity: 0}}
+      animate={{ opacity: 1}}
+      exit={{ opacity: 0}}
+    >
       <section id="about-us">
         <h1>About Us</h1>
         <p>
@@ -26,7 +33,8 @@ const About = () => {
         </p>
         <p>
           Today, ReFurnished empowers you to buy quality used furniture and give
-          a second life to your old pieces. Our commitment is to great value for both buyer and seller.
+          a second life to your old pieces. Our commitment is to great value for
+          both buyer and seller.
         </p>
       </section>
       <section id="what-we-believe">
@@ -50,14 +58,15 @@ const About = () => {
         <h2>Join Our Community</h2>
         <p>
           We invite you to join us on this journey to furnish your space
-          sustainably. Explore ReFurnished, <Link to="/browse">Browse Furnitures</Link>.
+          sustainably. Explore ReFurnished,{" "}
+          <Link to="/browse">Browse Furnitures</Link>.
         </p>
         <p>
           Thank you for being a part of the ReFurnished community. Together, we
           can create a more sustainable and stylish world.
         </p>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

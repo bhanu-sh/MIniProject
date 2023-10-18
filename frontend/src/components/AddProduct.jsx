@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
+import { motion } from "framer-motion";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -51,13 +52,16 @@ const AddProduct = () => {
 
       // send the data to the server
 
-      const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/add", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/product/add",
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log(res.status);
 
@@ -94,16 +98,25 @@ const AddProduct = () => {
     const fd = new FormData();
     fd.append("myfile", file);
 
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/util/uploadfile", {
-      method: "POST",
-      body: fd,
-    });
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/util/uploadfile",
+      {
+        method: "POST",
+        body: fd,
+      }
+    );
 
     console.log(res.status);
   };
 
   return (
-    <div className="py-5">
+    <motion.div
+      className="py-5"
+      style={{ height: "100vh" }}
+      initial={{ opacity: 0}}
+      animate={{ opacity: 1}}
+      exit={{ opacity: 0}}
+    >
       <div className="col-md-4 mx-auto">
         <div className="card shadow">
           <div className="card-body ">
@@ -150,15 +163,15 @@ const AddProduct = () => {
                 onChange={productForm.handleChange}
                 value={productForm.values.description}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     e.preventDefault();
-                    const currentValue = productForm.values.description || '';
+                    const currentValue = productForm.values.description || "";
                     const cursorPosition = e.target.selectionStart;
                     const newValue =
                       currentValue.substring(0, cursorPosition) +
-                      '\n' +
+                      "\n" +
                       currentValue.substring(cursorPosition);
-                    productForm.setFieldValue('description', newValue);
+                    productForm.setFieldValue("description", newValue);
                   }
                 }}
               ></textarea>
@@ -173,8 +186,8 @@ const AddProduct = () => {
                 onChange={productForm.handleChange}
                 value={productForm.values.year}
               />
-              {sessionStorage.user &&  JSON.parse(sessionStorage.user).isAdmin
-               ? (
+              {sessionStorage.user &&
+              JSON.parse(sessionStorage.user).isAdmin ? (
                 <>
                   <label>Price:</label>
                   <input
@@ -214,7 +227,7 @@ const AddProduct = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

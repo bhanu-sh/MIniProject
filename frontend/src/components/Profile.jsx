@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
+import { motion } from "framer-motion";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -16,9 +17,7 @@ const Profile = () => {
   const [userEmail, setUserEmail] = useState(
     JSON.parse(sessionStorage.user).email
   );
-  const [userAvatar] = useState(
-    JSON.parse(sessionStorage.user).avatar
-  );
+  const [userAvatar] = useState(JSON.parse(sessionStorage.user).avatar);
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState([]);
   const [yourOrderData, setYourOrderData] = useState([]);
@@ -26,7 +25,9 @@ const Profile = () => {
   const [toggleEdit, setToggleEdit] = useState(false);
 
   const fetchUserData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/user/getbyid/${id}`);
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/user/getbyid/${id}`
+    );
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -35,7 +36,9 @@ const Profile = () => {
   };
 
   const fetchProductData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/product/getall"
+    );
     console.log(res.status);
 
     if (res.status === 200) {
@@ -46,7 +49,9 @@ const Profile = () => {
   };
 
   const fetchOrderData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/getall`);
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/order/getall`
+    );
     if (res.status === 200) {
       const data = await res.json();
       const userOrders = data.filter((order) => order.user_id === id);
@@ -66,13 +71,16 @@ const Profile = () => {
   const submitForm = async (values, { setSubmitting }) => {
     console.log(values);
 
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/user/update/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(values),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/user/update/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     console.log(res.status);
 
@@ -86,7 +94,13 @@ const Profile = () => {
   };
 
   return (
-    <div className="">
+    <motion.div
+      className=""
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <div className="container">
         <h1 className="text-center mb-5 text-decoration-underline">
           My Account
@@ -237,9 +251,11 @@ const Profile = () => {
           </div>
         </div>
         <hr />
-        <h3 className="text-center text-decoration-underline">Seller Section</h3>
+        <h3 className="text-center text-decoration-underline">
+          Seller Section
+        </h3>
         <div className="row">
-        <div className="col-md-4 mt-4 mx-auto">
+          <div className="col-md-4 mt-4 mx-auto">
             <div className="card text-center">
               <div className="card-body">
                 <h1>My Furnitures</h1>
@@ -276,7 +292,7 @@ const Profile = () => {
       <div className="mt-5">
         <Footer />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

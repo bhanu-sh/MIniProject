@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const MyOrders = () => {
   const navigate = useNavigate();
@@ -8,7 +9,9 @@ const MyOrders = () => {
   const [noOrdersAdded, setNoOrdersAdded] = useState(false);
 
   const fetchOrderData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/order/getall");
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/order/getall"
+    );
     console.log(res.status);
 
     if (res.status === 200) {
@@ -28,8 +31,11 @@ const MyOrders = () => {
   };
 
   const handleDeleteOrder = async (orderId, orderStatus) => {
-
-    if (orderStatus === "Cancelled" || orderStatus === "Delivered" || orderStatus === "Dispatched") {
+    if (
+      orderStatus === "Cancelled" ||
+      orderStatus === "Delivered" ||
+      orderStatus === "Dispatched"
+    ) {
       toast.error("Order cannot be cancelled now.");
       return;
     }
@@ -71,7 +77,13 @@ const MyOrders = () => {
   }, []);
 
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ height: "100vh" }}
+    >
       <h1 className="mt-2">Orders</h1>
       <hr />
       <div className="row">
@@ -84,7 +96,9 @@ const MyOrders = () => {
                     {order.image ? (
                       <img
                         className="card img-resize img-fluid"
-                        src={process.env.REACT_APP_BACKEND_URL + "/" + order.image}
+                        src={
+                          process.env.REACT_APP_BACKEND_URL + "/" + order.image
+                        }
                         alt=""
                       />
                     ) : (
@@ -102,9 +116,9 @@ const MyOrders = () => {
                       <p className="text-secondary">
                         Seller: {order.seller_name}
                       </p>
-                        <h6 className="text-success">
-                          Amount: &#8377; {order.price}{" "}
-                        </h6>
+                      <h6 className="text-success">
+                        Amount: &#8377; {order.price}{" "}
+                      </h6>
                       <p>
                         Status:{" "}
                         <span className="text-success">{order.status}</span>
@@ -112,7 +126,9 @@ const MyOrders = () => {
                       <div className="row">
                         <div className="col-md-6 my-2">
                           <button
-                            onClick={() => handleDeleteOrder(order._id, order.status)}
+                            onClick={() =>
+                              handleDeleteOrder(order._id, order.status)
+                            }
                             className="btn btn-danger shadow text-center w-100"
                           >
                             Cancel
@@ -144,7 +160,7 @@ const MyOrders = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

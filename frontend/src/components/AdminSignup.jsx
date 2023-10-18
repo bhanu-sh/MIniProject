@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -40,19 +41,22 @@ const AdminSignup = () => {
           console.log(values);
           setSubmitting(false);
         }, 3000);
-  
+
         // send the data to the server
-  
-        const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/user/add", {
-          method: "POST",
-          body: JSON.stringify(values),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-  
+
+        const res = await fetch(
+          process.env.REACT_APP_BACKEND_URL + "/user/add",
+          {
+            method: "POST",
+            body: JSON.stringify(values),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
         console.log(res.status);
-  
+
         if (res.status === 200) {
           Swal.fire({
             icon: "success",
@@ -72,7 +76,6 @@ const AdminSignup = () => {
             text: "Something went wrong",
           });
         }
-        
       } else {
         Swal.fire({
           icon: "error",
@@ -96,27 +99,45 @@ const AdminSignup = () => {
     const fd = new FormData();
     fd.append("myfile", file);
 
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/util/uploadfile", {
-      method: "POST",
-      body: fd,
-    });
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/util/uploadfile",
+      {
+        method: "POST",
+        body: fd,
+      }
+    );
 
     console.log(res.status);
   };
 
   return (
-    <div>
+    <motion.div
+      style={{ height: "100vh" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className="col-md-4 mx-auto mt-5">
         <div className="card shadow">
           <div className="card-body ">
             <form onSubmit={signupForm.handleSubmit}>
               <h3 className="text-center">Signup Form</h3>
               <div className="row text-center mb-4">
-                <Link to={"/signup"} className="text-decoration-none col-md-6 text-black">
-                  <div><h5>User</h5></div>
+                <Link
+                  to={"/signup"}
+                  className="text-decoration-none col-md-6 text-black"
+                >
+                  <div>
+                    <h5>User</h5>
+                  </div>
                 </Link>
-                <Link to={"/adminsignup"} className="text-decoration-none col-md-6 border-bottom border-danger border-4 text-danger">
-                  <div><h5>Admin</h5></div>
+                <Link
+                  to={"/adminsignup"}
+                  className="text-decoration-none col-md-6 border-bottom border-danger border-4 text-danger"
+                >
+                  <div>
+                    <h5>Admin</h5>
+                  </div>
                 </Link>
               </div>
 
@@ -201,7 +222,7 @@ const AdminSignup = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

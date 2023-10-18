@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -9,15 +10,19 @@ const Admin = () => {
   const [withoutPriceCount, setWithoutPriceCount] = useState(0);
 
   const fetchProductData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/product/getall");
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/product/getall"
+    );
     console.log(res.status);
-  
+
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
       setProductData(data);
-  
-      const unpricedProductsCount = data.filter((product) => !product.price).length;
+
+      const unpricedProductsCount = data.filter(
+        (product) => !product.price
+      ).length;
       setWithoutPriceCount(unpricedProductsCount);
     }
   };
@@ -31,7 +36,9 @@ const Admin = () => {
     }
   };
   const fetchOrderData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/order/getall`);
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/order/getall`
+    );
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
@@ -46,7 +53,13 @@ const Admin = () => {
   }, []);
 
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      style={{ height: "100vh" }}
+      initial={{ opacity: 0}}
+      animate={{ opacity: 1}}
+      exit={{ opacity: 0}}
+    >
       <h1 className="text-center text-decoration-underline mt-3">
         Admin Dashboard
       </h1>
@@ -116,7 +129,7 @@ const Admin = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
