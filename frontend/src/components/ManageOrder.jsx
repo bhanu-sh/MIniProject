@@ -56,7 +56,7 @@ const ManageOrder = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ height: "100vh" }}
+      style={{ minHeight: "100vh" }}
     >
       {orderData &&
       JSON.parse(sessionStorage.user)._id === orderData.seller_id ? (

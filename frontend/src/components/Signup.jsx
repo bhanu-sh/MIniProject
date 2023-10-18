@@ -95,7 +95,7 @@ const Signup = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ height: "100vh" }}
+      style={{ minHeight: "100vh" }}
     >
       <div className="col-md-4 mx-auto mt-5">
         <div className="card shadow">

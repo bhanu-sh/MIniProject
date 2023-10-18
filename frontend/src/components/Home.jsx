@@ -11,7 +11,7 @@ const Home = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ height: "100vh" }}
+      style={{ minHeight: "100vh" }}
     >
       <div className="header vh-94">
         <div className="main vh-94">

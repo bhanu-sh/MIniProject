@@ -52,7 +52,7 @@ const UpdateUser = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ height: "100vh" }}
+      style={{ minHeight: "100vh" }}
     >
       <div className="container">
         <h1>Update User</h1>

@@ -80,7 +80,7 @@ const EditProduct = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ height: "100vh" }}
+      style={{ minHeight: "100vh" }}
     >
       {furnitureData &&
       (JSON.parse(sessionStorage.user)._id === furnitureData.user_id ||
