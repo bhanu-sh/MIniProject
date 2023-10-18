@@ -85,8 +85,12 @@ background: linear-gradient(to top, #434343, #000000);
 }
 
 .img-resize {
+  object-fit: cover;
+  object-position: center;
   height: 300px;
+  margin-bottom: 1rem;
 }
+
 
 .vh-94 {
   height: 94vh;
@@ -104,14 +108,6 @@ background: linear-gradient(to top, #434343, #000000);
   font-weight: 400;
 }
 
-.furniture-card-browse {
-  transform: scale(1);
-}
-
-.furniture-card-browse:hover {
-  transform: scale(1.02);
-  transition: 0.1s;
-}
 
 .img-250 {
   height: 250px;

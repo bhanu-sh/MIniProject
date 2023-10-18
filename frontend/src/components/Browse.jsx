@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "./Footer";
 import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 
 const Browse = () => {
   const location = useLocation();
@@ -48,12 +49,13 @@ const Browse = () => {
           className="col-md-3 py-2 furniture-card-browse"
           key={furniture._id}
         >
+          <Tilt>
           <div className="card">
-            <img
-              className="card img-resize img-fluid"
-              src={process.env.REACT_APP_BACKEND_URL + "/" + furniture.image}
-              alt=""
-            />
+              <img
+                className="card img-resize img-fluid img-cover"
+                src={process.env.REACT_APP_BACKEND_URL + "/" + furniture.image}
+                alt=""
+              />
             <div className="card-body">
               <h3>{furniture.title}</h3>
               <h4 className="text-success">
@@ -67,6 +69,7 @@ const Browse = () => {
               </Link>
             </div>
           </div>
+          </Tilt>
         </div>
       ) : null
     );

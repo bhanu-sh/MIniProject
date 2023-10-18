@@ -11,7 +11,6 @@ import NotFound from "./NotFound";
 import UserAuth from "./UserAuth";
 import AddProduct from "./AddProduct";
 import MyProducts from "./MyProducts";
-import EditProduct from "./SetPrice";
 import Profile from "./Profile";
 import MyOrders from "./MyOrders";
 import UserAllOrders from "./UserAllOrders";
@@ -26,6 +25,7 @@ import SetPrice from "./SetPrice";
 import Admin from "./Admin";
 import Checkout from "./Checkout";
 import { AnimatePresence } from "framer-motion";
+import EditProduct from "./EditProduct";
 
 const AnimatedRoutes = () => {
   const location = useLocation();

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const EditProduct = () => {
+const SetPrice = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -142,4 +142,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default SetPrice;

@@ -7,7 +7,7 @@ const AllOrders = () => {
   const [orderData, setOrderData] = useState([]);
 
   const fetchOrderData = async () => {
-    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "order/getall");
+    const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/order/getall");
     console.log(res.status);
 
     if (res.status === 200) {
