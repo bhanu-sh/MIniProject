@@ -26,12 +26,6 @@ const About = () => {
       <section id="our-story">
         <h2>Our Journey</h2>
         <p>
-          ReFurnished started as a vision to transform the way people [buy/sell]
-          furniture. Our team, comprising Bhanu (Developer) and Mohd. Mubassir
-          Sir (Mentor), set out to create a seamless platform that allows any
-          user to post and publish their furniture and get great value.
-        </p>
-        <p>
           Today, ReFurnished empowers you to buy quality used furniture and give
           a second life to your old pieces. Our commitment is to great value for
           both buyer and seller.
