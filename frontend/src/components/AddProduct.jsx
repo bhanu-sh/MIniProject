@@ -109,6 +109,7 @@ const AddProduct = () => {
 
     if (res.status === 200) {
       setSelFile(data.fileUrl);
+      console.log(data.fileUrl);
     } else {
       console.error("File upload failed");
     }
