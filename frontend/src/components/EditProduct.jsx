@@ -14,11 +14,10 @@ const EditProduct = () => {
   const [furnitureData, setFurnitureData] = useState(null);
 
   const uploadFile = async (e) => {
-    if (!e.target.files || e.target.files === "") return;
+    if (!e.target.files) return;
 
     const file = e.target.files[0];
     console.log(file.name);
-    setSelFile(file.name);
 
     const fd = new FormData();
     fd.append("myfile", file);
@@ -31,7 +30,15 @@ const EditProduct = () => {
       }
     );
 
-    console.log("Status of upload: " + res.status);
+    const data = await res.json();
+
+    if (res.status === 200) {
+      setSelFile(data.fileUrl);
+    } else {
+      console.error("File upload failed");
+    }
+
+    console.log(res.status);
   };
 
   const fetchFurnitureData = async () => {

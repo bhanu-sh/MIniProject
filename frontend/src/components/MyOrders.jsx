@@ -97,7 +97,7 @@ const MyOrders = () => {
                       <img
                         className="card img-resize img-fluid"
                         src={
-                          process.env.REACT_APP_BACKEND_URL + "/" + order.image
+                          process.env.REACT_APP_AWS_PATH + "/" + order.image
                         }
                         alt=""
                       />

@@ -1,38 +1,71 @@
-const multer = require('multer');
 const express = require('express');
-const fs = require('fs'); // Import the 'fs' module for file system operations
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const { S3Client, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
 const router = express.Router();
 
-const myStorage = multer.diskStorage({
-    destination: (req, file, cb) => { cb(null, './uploads') },
-    filename: (req, file, cb) => { cb(null, file.originalname) }
+// Configure AWS SDK v3
+const s3 = new S3Client({
+    region: process.env.AWS_REGION,
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
 });
 
-const uploader = multer({ storage: myStorage });
-
-router.post('/uploadfile', uploader.single('myfile'), (req, res) => {
-    res.json({ status: 'success' });
+const s3Storage = multerS3({
+    s3: s3,
+    bucket: process.env.S3_BUCKET_NAME,
+    metadata: (req, file, cb) => {
+        cb(null, { fieldName: file.fieldname });
+    },
+    key: (req, file, cb) => {
+        cb(null, Date.now().toString() + '-' + file.originalname);
+    }
 });
 
-// Add a new route for deleting files
+const uploader = multer({ storage: s3Storage });
+
+router.post('/uploadfile', uploader.single('myfile'), async (req, res) => {
+    const fileKey = req.file.key;
+    const bucketName = process.env.S3_BUCKET_NAME;
+
+    try {
+        const getObjectParams = {
+            Bucket: bucketName,
+            Key: fileKey,
+        };
+
+        const fileUrl = getObjectParams.Key;
+        console.log(`File uploaded: ${fileUrl}`);
+
+        res.json({ status: 'success', fileUrl: fileUrl });
+    } catch (err) {
+        console.error(`Error generating signed URL: ${err}`);
+        res.status(500).json({ status: 'error', message: 'Failed to generate file URL' });
+    }
+});
+
 router.delete('/deletefile/:filename', (req, res) => {
-    const filename = req.params.filename;
-    const filePath = `./uploads/${filename}`;
+    const fileUrl = req.params.filename;
+    const bucketName = process.env.S3_BUCKET_NAME;
 
-    // Check if the file exists
-    if (fs.existsSync(filePath)) {
-        // Delete the file
-        fs.unlink(filePath, (err) => {
-            if (err) {
-                console.error(`Error deleting file: ${err}`);
-                res.status(500).json({ status: 'error', message: 'File deletion failed' });
-            } else {
-                res.json({ status: 'success', message: 'File deleted successfully' });
-            }
-        });
-    } else {
-        res.status(404).json({ status: 'error', message: 'File not found' });
+    try {
+        const deleteObjectParams = {
+            Bucket: bucketName,
+            Key: fileUrl,
+        };
+
+        const command = new DeleteObjectCommand(deleteObjectParams);
+        s3.send(command);
+
+        console.log(`File deleted: ${fileUrl}`);
+        res.json({ status: 'success', message: 'File deleted successfully' });
+    } catch (err) {
+        console.error(`Error deleting file: ${err}`);
+        res.status(500).json({ status: 'error', message: 'Failed to delete file' });
     }
 });
 

@@ -48,7 +48,7 @@ const Product = () => {
         <div className="col-md-4">
           <img
             className="card img-fluid shadow"
-            src={process.env.REACT_APP_BACKEND_URL + "/" + furnitureData.image}
+            src={process.env.REACT_APP_AWS_PATH + "/" + furnitureData.image}
             alt=""
           />
         </div>

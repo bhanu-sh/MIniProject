@@ -93,7 +93,6 @@ const AddProduct = () => {
 
     const file = e.target.files[0];
     console.log(file.name);
-    setSelFile(file.name);
 
     const fd = new FormData();
     fd.append("myfile", file);
@@ -106,6 +105,14 @@ const AddProduct = () => {
       }
     );
 
+    const data = await res.json();
+
+    if (res.status === 200) {
+      setSelFile(data.fileUrl);
+    } else {
+      console.error("File upload failed");
+    }
+
     console.log(res.status);
   };
 
@@ -113,9 +120,9 @@ const AddProduct = () => {
     <motion.div
       className="py-5"
       style={{ height: "100vh" }}
-      initial={{ opacity: 0}}
-      animate={{ opacity: 1}}
-      exit={{ opacity: 0}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
       <div className="col-md-4 mx-auto">
         <div className="card shadow">

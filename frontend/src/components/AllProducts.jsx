@@ -108,7 +108,7 @@ const AllProducts = () => {
                     <img
                       className="card img-resize img-fluid"
                       src={
-                        process.env.REACT_APP_BACKEND_URL +
+                        process.env.REACT_APP_AWS_PATH +
                         "/" +
                         furniture.image
                       }

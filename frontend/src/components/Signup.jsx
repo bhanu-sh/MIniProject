@@ -74,7 +74,6 @@ const Signup = () => {
 
     const file = e.target.files[0];
     console.log(file.name);
-    setSelFile(file.name);
 
     const fd = new FormData();
     fd.append("myfile", file);
@@ -86,6 +85,14 @@ const Signup = () => {
         body: fd,
       }
     );
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      setSelFile(data.fileUrl);
+    } else {
+      console.error("File upload failed");
+    }
 
     console.log(res.status);
   };
