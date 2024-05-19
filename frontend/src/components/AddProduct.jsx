@@ -215,7 +215,9 @@ const AddProduct = () => {
                 onChange={uploadFile}
               />
               <button
-                disabled={productForm.isSubmitting}
+                disabled={
+                  productForm.isSubmitting || !selFile || selFile === ""
+                }
                 type="submit"
                 className="btn btn-primary mt-5 w-100"
               >

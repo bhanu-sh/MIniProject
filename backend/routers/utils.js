@@ -1,12 +1,10 @@
 const express = require('express');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
-const { S3Client, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
-const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const { S3Client, DeleteObjectCommand } = require('@aws-sdk/client-s3');
 
 const router = express.Router();
 
-// Configure AWS SDK v3
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
