@@ -96,6 +96,15 @@ const Profile = () => {
       setToggleEdit(false);
     }
     setSubmitting(false);
+
+    const user = JSON.parse(sessionStorage.user);
+    user.name = values.name;
+    user.email = values.email;
+    user.avatar = selFile;
+    sessionStorage.setItem("user", JSON.stringify(user));
+
+    //refresh whole page
+    window.location.reload();
   };
 
   const uploadFile = async (e) => {
