@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const AppContext = createContext();
@@ -14,6 +15,7 @@ export const AppProvider = ({children}) => {
     const logout = () => {
         sessionStorage.removeItem('user');
         setLoggedin(false);
+        toast.success("Logged out successfully");
         navigate('/');
     }
 

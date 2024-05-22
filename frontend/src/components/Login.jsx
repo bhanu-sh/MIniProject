@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
 import React from "react";
-import Swal from "sweetalert2";
 import UseAppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,34 +31,15 @@ const Login = () => {
       console.log(res.status);
 
       if (res.status === 200) {
-        Swal.fire({
-          icon: "success",
-          title: "Login Successful",
-        })
-          .then((result) => {
-            navigate(-1);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
+        toast.success("Login Successfull");
+        navigate(-1);
         const data = await res.json();
-
         sessionStorage.setItem("user", JSON.stringify(data));
-
         setLoggedin(true);
       } else if (res.status === 401) {
-        Swal.fire({
-          icon: "error",
-          title: "Invalid Credentials",
-          text: "Email or password is incorrect",
-        });
+        toast.error("Login Failed");
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error Occured!",
-          text: "SOmething went wrong",
-        });
+        toast.error("Something went wrong");
       }
     },
   });
