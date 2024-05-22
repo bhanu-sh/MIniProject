@@ -16,6 +16,24 @@ const EditProduct = () => {
 
   const uploadFile = async (e) => {
     try {
+      const res = await fetch(
+        process.env.REACT_APP_BACKEND_URL +
+          `/util/deletefile/${furnitureData.image}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (res.status === 200) {
+        console.log("Image deleted successfully.");
+      } else {
+        console.log("Error deleting Image.");
+      }
+    } catch (error) {
+      console.error("An error occurred in image deletion:", error);
+    }
+
+    try {
       setUploading(true);
       if (!e.target.files) return;
 

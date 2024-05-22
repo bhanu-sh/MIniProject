@@ -110,14 +110,11 @@ const Profile = () => {
 
       if (res.status === 200) {
         console.log("Image deleted successfully.");
-        toast.success("Image deleted successfully.");
       } else {
         console.log("Error deleting Image.");
-        toast.error("Error deleting Image.");
       }
     } catch (error) {
       console.error("An error occurred in image deletion:", error);
-      toast.error("An error occurred in image deletion.");
     }
 
     try {
