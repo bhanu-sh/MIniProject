@@ -9,15 +9,33 @@ import { motion } from "framer-motion";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const id = JSON.parse(sessionStorage.user)._id;
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = sessionStorage.getItem('user');
+    if (userData) {
+      try {
+        setUser(JSON.parse(userData));
+      } catch (error) {
+        console.error("Invalid JSON in sessionStorage.user", error);
+        // Handle the error, possibly by redirecting to a login page
+        navigate('/login');
+      }
+    } else {
+      // Redirect to login if no user data is found
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  const id = user?._id;
 
   const [userName, setUserName] = useState(
-    JSON.parse(sessionStorage.user).name
+    user?.name
   );
   const [userEmail, setUserEmail] = useState(
-    JSON.parse(sessionStorage.user).email
+    user?.email
   );
-  const [userAvatar] = useState(JSON.parse(sessionStorage.user).avatar);
+  const [userAvatar] = useState(user?.avatar);
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState([]);
   const [yourOrderData, setYourOrderData] = useState([]);
@@ -25,7 +43,6 @@ const Profile = () => {
   const [toggleEdit, setToggleEdit] = useState(false);
   const [selFile, setSelFile] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [passToggle, setPassToggle] = useState(false);
 
   const fetchUserData = async () => {
     const res = await fetch(
