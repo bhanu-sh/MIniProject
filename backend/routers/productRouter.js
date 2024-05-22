@@ -54,7 +54,15 @@ router.get('/getbyid/:id', (req, res) => {
 
 router.put("/update/:id", (req, res) => {
 
-    Model.findByIdAndUpdate(req.params.id, req.body, { new : true })
+    const data = req.body;
+    const updateData = {};
+    for(let key in data){
+        if(data[key] !== ""){
+            updateData[key] = data[key];
+        }
+    }
+
+    Model.findByIdAndUpdate(req.params.id, updateData, { new : true })
     .then((result) => {
         res.json(result);
     })
