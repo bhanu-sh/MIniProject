@@ -24,7 +24,7 @@ const Navbar = () => {
               <Link to={"/profile"}>
                 {user.avatar ? (
                   <img
-                    src={process.env.REACT_APP_AWS_PATH + "/" + user.avatar}
+                    src={"https://refurnished.s3.amazonaws.com/" + user.avatar}
                     width={50}
                     className="rounded-circle pfp"
                     alt=""

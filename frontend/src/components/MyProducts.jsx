@@ -120,8 +120,7 @@ const MyProducts = () => {
                       <img
                         className="card img-resize img-fluid"
                         src={
-                          process.env.REACT_APP_AWS_PATH +
-                          "/" +
+                          "https://refurnished.s3.amazonaws.com/" +
                           furniture.image
                         }
                         alt=""

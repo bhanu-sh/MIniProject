@@ -48,7 +48,7 @@ const Product = () => {
         <div className="col-md-4">
           <img
             className="card img-fluid shadow"
-            src={process.env.REACT_APP_AWS_PATH + "/" + furnitureData.image}
+            src={"https://refurnished.s3.amazonaws.com/" + furnitureData.image}
             alt=""
           />
         </div>

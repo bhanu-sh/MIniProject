@@ -170,7 +170,7 @@ const Profile = () => {
           <div className="row">
             <div className="col-md-2 ms-2 my-2 text-center">
               <img
-                src={process.env.REACT_APP_AWS_PATH + "/" + userAvatar}
+                src={"https://refurnished.s3.amazonaws.com/" + userAvatar}
                 width={120}
                 height={120}
                 className="rounded-circle shadow"

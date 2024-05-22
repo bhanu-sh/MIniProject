@@ -62,7 +62,7 @@ const Browse = () => {
                 <img
                   className="card img-resize img-fluid img-cover"
                   src={
-                    process.env.REACT_APP_AWS_PATH + "/" + furniture.image
+                    "https://refurnished.s3.amazonaws.com/" + furniture.image
                   }
                   alt=""
                 />
