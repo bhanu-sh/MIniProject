@@ -14,6 +14,17 @@ const EditProduct = () => {
 
   const [furnitureData, setFurnitureData] = useState(null);
 
+  const fetchFurnitureData = async () => {
+    const res = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`
+    );
+    if (res.status === 200) {
+      const data = await res.json();
+      console.log(data);
+      setFurnitureData(data);
+    }
+  };
+
   const uploadFile = async (e) => {
     try {
       const res = await fetch(
@@ -64,17 +75,6 @@ const EditProduct = () => {
       console.log(error);
     } finally {
       setUploading(false);
-    }
-  };
-
-  const fetchFurnitureData = async () => {
-    const res = await fetch(
-      process.env.REACT_APP_BACKEND_URL + `/product/getbyid/${id}`
-    );
-    if (res.status === 200) {
-      const data = await res.json();
-      console.log(data);
-      setFurnitureData(data);
     }
   };
 
