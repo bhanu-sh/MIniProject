@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 const AddProduct = () => {
   const navigate = useNavigate();
   const [selFile, setSelFile] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const ProductSchema = Yup.object().shape({
     title: Yup.string()
@@ -27,8 +28,6 @@ const AddProduct = () => {
         return value >= 1950 && value <= 2023;
       }),
   });
-
-  console.log(JSON.parse(sessionStorage.user)._id);
 
   const productForm = useFormik({
     initialValues: {
@@ -89,32 +88,38 @@ const AddProduct = () => {
   });
 
   const uploadFile = async (e) => {
-    if (!e.target.files) return;
+    try {
+      setUploading(true);
+      if (!e.target.files) return;
 
-    const file = e.target.files[0];
-    console.log(file.name);
+      const file = e.target.files[0];
+      console.log(file.name);
 
-    const fd = new FormData();
-    fd.append("myfile", file);
+      const fd = new FormData();
+      fd.append("myfile", file);
 
-    const res = await fetch(
-      process.env.REACT_APP_BACKEND_URL + "/util/uploadfile",
-      {
-        method: "POST",
-        body: fd,
+      const res = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/util/uploadfile",
+        {
+          method: "POST",
+          body: fd,
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        setSelFile(data.fileUrl);
+        console.log(data.fileUrl);
+      } else {
+        console.error("File upload failed");
       }
-    );
-
-    const data = await res.json();
-
-    if (res.status === 200) {
-      setSelFile(data.fileUrl);
-      console.log(data.fileUrl);
-    } else {
-      console.error("File upload failed");
+      console.log(res.status);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploading(false);
     }
-
-    console.log(res.status);
   };
 
   return (
@@ -215,9 +220,7 @@ const AddProduct = () => {
                 onChange={uploadFile}
               />
               <button
-                disabled={
-                  productForm.isSubmitting || !selFile || selFile === ""
-                }
+                disabled={productForm.isSubmitting || uploading}
                 type="submit"
                 className="btn btn-primary mt-5 w-100"
               >
@@ -230,7 +233,7 @@ const AddProduct = () => {
                     <span>Loading ...</span>
                   </>
                 ) : (
-                  "Submit"
+                  <>{uploading ? "Uploading..." : "Submit"}</>
                 )}
               </button>
             </form>

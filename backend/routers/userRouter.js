@@ -68,18 +68,23 @@ router.get("/getbyid/:id", (req, res) => {
 });
 
 router.put("/update/:id", (req, res) => {
-  const { email, password, name, avatar, isAdmin } = req.body;
+  const { email, password, name, avatar } = req.body;
+
+  const updateData = {};
+  if (email) updateData.email = email;
+  if (password && !password == "") updateData.password = password;
+  if (name) updateData.name = name;
+  if (avatar && !avatar == "") updateData.avatar = avatar;
 
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log(err);
       res.status(500).json(err);
     } else {
-      Model.findByIdAndUpdate(
-        req.params.id,
-        { email, password: hash, name, avatar, isAdmin },
-        { new: true }
-      )
+      if (password) {
+        updateData.password = hash;
+      }
+      Model.findByIdAndUpdate(req.params.id, updateData, { new: true })
         .then((result) => {
           res.json(result);
         })

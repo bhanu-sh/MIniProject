@@ -23,6 +23,9 @@ const Profile = () => {
   const [yourOrderData, setYourOrderData] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false);
+  const [selFile, setSelFile] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [passToggle, setPassToggle] = useState(false);
 
   const fetchUserData = async () => {
     const res = await fetch(
@@ -70,7 +73,7 @@ const Profile = () => {
 
   const submitForm = async (values, { setSubmitting }) => {
     console.log(values);
-
+    values.avatar = selFile;
     const res = await fetch(
       process.env.REACT_APP_BACKEND_URL + `/user/update/${id}`,
       {
@@ -91,6 +94,62 @@ const Profile = () => {
       setToggleEdit(false);
     }
     setSubmitting(false);
+  };
+
+  const uploadFile = async (e) => {
+    try {
+      const res = await fetch(
+        process.env.REACT_APP_BACKEND_URL +
+          `/util/deletefile/${userData.avatar}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (res.status === 200) {
+        console.log("Image deleted successfully.");
+        toast.success("Image deleted successfully.");
+      } else {
+        console.log("Error deleting Image.");
+        toast.error("Error deleting Image.");
+      }
+    } catch (error) {
+      console.error("An error occurred in image deletion:", error);
+      toast.error("An error occurred in image deletion.");
+    }
+
+    try {
+      setUploading(true);
+      if (!e.target.files) return;
+
+      const file = e.target.files[0];
+      console.log(file.name);
+
+      const fd = new FormData();
+      fd.append("myfile", file);
+
+      const res = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/util/uploadfile",
+        {
+          method: "POST",
+          body: fd,
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        setSelFile(data.fileUrl);
+        console.log(data.fileUrl);
+      } else {
+        console.error("File upload failed");
+      }
+      console.log(res.status);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -197,13 +256,12 @@ const Profile = () => {
                             className="form-control mb-4"
                             name="password"
                             onChange={signupForm.handleChange}
-                            value={signupForm.values.password}
                           />
 
-                          {/* <input type="file" onChange={uploadFile} /> */}
+                          <input type="file" onChange={uploadFile} />
 
                           <button
-                            disabled={signupForm.isSubmitting}
+                            disabled={signupForm.isSubmitting || uploading}
                             type="submit"
                             className="btn btn-primary mt-5 w-100"
                           >
@@ -216,7 +274,7 @@ const Profile = () => {
                                 <span>Loading ...</span>
                               </>
                             ) : (
-                              "Submit"
+                              <>{uploading ? "Uploading..." : "Submit"}</>
                             )}
                           </button>
                         </form>
