@@ -12,11 +12,11 @@ export const AppProvider = ({children}) => {
 
     const navigate = useNavigate();
 
-    const logout = () => {
-        sessionStorage.removeItem('user');
+    const logout = async () => {
         setLoggedin(false);
         toast.success("Logged out successfully");
-        navigate('/');
+        await navigate('/');
+        sessionStorage.removeItem('user');
     }
 
     const [loggedin, setLoggedin] = useState(currentUser!==null);

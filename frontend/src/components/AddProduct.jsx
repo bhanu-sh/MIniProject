@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
@@ -9,23 +9,6 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const [selFile, setSelFile] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const userData = sessionStorage.getItem('user');
-    if (userData) {
-      try {
-        setUser(JSON.parse(userData));
-      } catch (error) {
-        console.error("Invalid JSON in sessionStorage.user", error);
-        // Handle the error, possibly by redirecting to a login page
-        navigate('/login');
-      }
-    } else {
-      // Redirect to login if no user data is found
-      navigate('/login');
-    }
-  }, [navigate]);
 
   const ProductSchema = Yup.object().shape({
     title: Yup.string()
@@ -54,8 +37,8 @@ const AddProduct = () => {
       year: "",
       image: "",
       price: "",
-      user_id: user?._id || "",
-      user_name: user?.name || "",
+      user_id: JSON.parse(sessionStorage.user)._id,
+      user_name: JSON.parse(sessionStorage.user).name,
     },
     onSubmit: async (values, { setSubmitting }) => {
       values.image = selFile;
